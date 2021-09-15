@@ -1,0 +1,35 @@
+﻿@model IEnumerable<ASPNetCoreApp.Models.Employee>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Employees list</title>
+</head>
+<body>
+    <a href="/">На главную</a>
+<table>
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Возраст</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var employee in Model)
+        {
+        <tr>
+            <td>@employee.Id</td>
+            <td>@employee.LastName</td>
+            <td>@employee.FirstName</td>
+            <td>@employee.Age</td>
+            <td><a href="/Employees/Details/@employee.Id">Детали</a></td>
+        </tr>            
+        }
+    </tbody>
+</table>
+</body>
+</html>

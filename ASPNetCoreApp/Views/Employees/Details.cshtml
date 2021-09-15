@@ -1,0 +1,16 @@
+﻿@model ASPNetCoreApp.Models.Employee
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <a href="/Employees">Возврат к списку сотрудников</a>
+
+    <h1>Дополнительная информация по сотруднику @Model.LastName @Model.FirstName</h1>
+    <p>Дата рождения: <b>@Model.BirthdayDate.ToShortDateString()</b></p>
+</body>
+</html>
