@@ -23,9 +23,7 @@ namespace ASPNetCoreApp.Controllers
 
         public IActionResult Details(int? id)
         {
-            Employee Employee = EmployeesList.Select(x => x)
-                                             .Where(x => x.Id == id)
-                                             .First();
+            Employee Employee = EmployeesList.Single(x => x.Id == id);
 
             return View(Employee);
         }
