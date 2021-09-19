@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 
+
 namespace ASPNetCoreApp
 {
     public class Startup
@@ -17,7 +18,8 @@ namespace ASPNetCoreApp
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews()
+                    .AddRazorRuntimeCompilation();
         }
 
 
