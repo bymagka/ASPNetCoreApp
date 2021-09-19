@@ -10,11 +10,17 @@ namespace ASPNetCoreApp.Controllers
 {
     public class EmployeesController : Controller
     {
-        private readonly IEnumerable<Employee> EmployeesList;
+        private static IEnumerable<Employee> EmployeesList;
+
+        private static bool _wasChanged = false; 
 
         public EmployeesController()
         {
-            EmployeesList = TestData.EmployeesList;
+            if (!_wasChanged)
+            {
+                EmployeesList = TestData.EmployeesList;
+            }
+
         }
 
         public IActionResult Index()
@@ -30,6 +36,18 @@ namespace ASPNetCoreApp.Controllers
             
 
             return View(Employee);
+        }
+
+        public IActionResult Delete(int? id)
+        {
+            EmployeesList = EmployeesList.Select(x => x)
+                            .Where(x => x.Id != id)
+                            .ToList();
+
+            //если этого не сделать, то при обновлении страницы контроллер создается заново и получает данные класса TestData в конструкторе
+            _wasChanged = true;
+
+            return View("Index",EmployeesList);
         }
     }
 }
