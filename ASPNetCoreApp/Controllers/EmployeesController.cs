@@ -30,15 +30,15 @@ namespace ASPNetCoreApp.Controllers
 
         public IActionResult Details(int? id)
         {
-            Employee Employee = EmployeesList.Single(x => x.Id == id);
+            Employee _Employee = EmployeesList.Single(x => x.Id == id);
 
-            if (Employee is null) return NotFound();
+            if (_Employee is null) return NotFound();
             
 
-            return View(Employee);
+            return View(_Employee);
         }
 
-        public IActionResult Delete(int id)
+        public IActionResult Delete(int? id)
         {
             EmployeesList = EmployeesList.Select(x => x)
                             .Where(x => x.Id != id)
@@ -47,7 +47,50 @@ namespace ASPNetCoreApp.Controllers
             //если этого не сделать, то при обновлении страницы контроллер создается заново и получает данные класса TestData в конструкторе
             _wasChanged = true;
 
-            return View("Index",EmployeesList);
+            return RedirectToAction("Index");
+        }
+
+
+        //GET
+        public IActionResult Edit(int? id)
+        {
+            Employee _Employee = EmployeesList.Single(x => x.Id == id);
+
+            if (_Employee is null) return NotFound();
+
+            //если этого не сделать, то при обновлении страницы контроллер создается заново и получает данные класса TestData в конструкторе, то есть затирая потенциальные изменения экземпляров
+
+            _wasChanged = true;
+
+            return View(_Employee);
+        }
+
+
+        //POST
+        [HttpPost]
+        public IActionResult Edit(Employee emp)
+        {
+            //Сохраним изменения. Почему с представления редактирования приходит другая ссылка на модель, нежели модель переданная по ссылке на представление редактирования?
+            //или по методу post отправляется копия полученной модели.
+
+            //как кажется, реализован костыль здесь у меня.
+
+       
+            _wasChanged = true;
+
+            var oldEmployee = EmployeesList.Single(x => x.Id == emp.Id);
+
+            if (oldEmployee is not null)
+            {
+                //oldEmployee = emp;
+                oldEmployee.BirthdayDate = emp.BirthdayDate;
+                oldEmployee.Age = emp.Age;
+                oldEmployee.FirstName = emp.FirstName;
+                oldEmployee.LastName = emp.LastName;
+
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }
