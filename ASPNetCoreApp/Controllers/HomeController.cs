@@ -12,5 +12,25 @@ namespace ASPNetCoreApp.Controllers
         {
             return View();
         }
+
+        public IActionResult PageNotFound() {
+            return View();
+        }
+
+        public IActionResult Blog() => View();
+
+        public IActionResult BlogSingle() => View();
+
+        public IActionResult Cart() => View();
+
+        public IActionResult Checkout() => View();
+
+        public IActionResult ContactUs() => View();
+
+        public IActionResult Login() => View();
+
+        public IActionResult Shop() => View();
+
+        public IActionResult ProductDetails() => View();
     }
 }

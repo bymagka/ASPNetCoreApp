@@ -38,7 +38,7 @@ namespace ASPNetCoreApp.Controllers
             return View(Employee);
         }
 
-        public IActionResult Delete(int? id)
+        public IActionResult Delete(int id)
         {
             EmployeesList = EmployeesList.Select(x => x)
                             .Where(x => x.Id != id)
