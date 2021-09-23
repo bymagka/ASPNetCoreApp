@@ -7,6 +7,7 @@ using ASPNetCoreApp.Models;
 using ASPNetCoreApp.Data;
 using ASPNetCoreApp.Services.Interfaces;
 using Microsoft.Extensions.Logging;
+using ASPNetCoreApp.ViewModels;
 
 namespace ASPNetCoreApp.Controllers
 {
@@ -40,28 +41,86 @@ namespace ASPNetCoreApp.Controllers
             return View(employee);
         }
 
+        public IActionResult Create()
+        {
+            return View("Edit",new EmployeeViewModel());
+        }
+
+        #region Delete
         public IActionResult Delete(int? id)
         {
             if (id is null) return RedirectToAction("PageNotFound", "Home");
 
-            return RedirectToAction("Index");
+            if ((int)id < 0) return RedirectToAction("PageNotFound", "Home");
+
+            var emp = employeeService.GetById((int)id);
+
+            if (emp is null) return RedirectToAction("PageNotFound", "Home");
+            
+            var model = new EmployeeViewModel
+            {
+                Id = emp.Id,
+                Age = emp.Age,
+                FirstName = emp.FirstName,
+                LastName = emp.LastName,
+                BirthdayDate = emp.BirthdayDate,
+            };
+
+            return View(model);
         }
 
 
+        [HttpPost]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            employeeService.Delete(id);
+
+            return RedirectToAction("Index");
+        }
+        #endregion
+
+        #region Edit
         //GET
         public IActionResult Edit(int? id)
         {
-            return RedirectToAction("Index");
+            if (id is null) return RedirectToAction("PageNotFound", "Home");
+
+            var emp = employeeService.GetById((int)id);
+
+            if(emp is null) return RedirectToAction("PageNotFound", "Home");
+
+            var model = new EmployeeViewModel
+            {
+                Age = emp.Age,
+                FirstName = emp.FirstName,
+                LastName = emp.LastName,
+                BirthdayDate = emp.BirthdayDate,
+            };
+
+            return View(model);
         }
 
 
         //POST
         [HttpPost]
-        public IActionResult Edit(Employee emp)
+        public IActionResult Edit(EmployeeViewModel empModel)
         {
 
+            var employee = new Employee
+            {
+                Id = empModel.Id,
+                Age = empModel.Age,
+                FirstName = empModel.FirstName,
+                LastName = empModel.LastName,
+                BirthdayDate = empModel.BirthdayDate,
+            };
 
+            if (employee.Id == 0) employeeService.Add(employee);
+            else employeeService.Update(employee);
+
+            
             return RedirectToAction("Index");
         }
+        #endregion
     }
 }
