@@ -43,7 +43,7 @@ namespace ASPNetCoreApp.Controllers
 
         public IActionResult Create()
         {
-            return View("Edit",new EmployeeViewModel());
+            return View("Edit",new EmployeeViewModel() { FirstName=null,LastName=null});
         }
 
         #region Delete
@@ -105,6 +105,8 @@ namespace ASPNetCoreApp.Controllers
         [HttpPost]
         public IActionResult Edit(EmployeeViewModel empModel)
         {
+
+            //if (!ModelState.IsValid) return View(empModel);
 
             var employee = new Employee
             {
