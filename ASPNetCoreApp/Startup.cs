@@ -8,7 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
-
+using ASPNetCoreApp.Services.Interfaces;
+using ASPNetCoreApp.Services;
 
 namespace ASPNetCoreApp
 {
@@ -18,6 +19,8 @@ namespace ASPNetCoreApp
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IEmployeeService, EmployeesManagementService>(); 
+
             services.AddControllersWithViews()
                     .AddRazorRuntimeCompilation();
         }
