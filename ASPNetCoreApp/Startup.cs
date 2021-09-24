@@ -19,7 +19,8 @@ namespace ASPNetCoreApp
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IEmployeeService, EmployeesManagementService>(); 
+            services.AddSingleton<IEmployeeService, EmployeesManagementService>();
+            services.AddSingleton<IProductData, ProductDataManagementService>();
 
             services.AddControllersWithViews()
                     .AddRazorRuntimeCompilation();
