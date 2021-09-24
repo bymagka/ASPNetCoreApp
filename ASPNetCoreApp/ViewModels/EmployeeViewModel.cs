@@ -14,6 +14,7 @@ namespace ASPNetCoreApp.ViewModels
 
         [Required(ErrorMessage = "Обязательно заполните Фамилию сотрудника")]
         [StringLength(50, MinimumLength = 3, ErrorMessage = "Фамилия сотрудника не может быть такой короткой")]
+        [RegularExpression("[a-zA-Za-яА-Я]{3,20}",ErrorMessage ="Фамилия не подходит ограничениям")]
         public string LastName { get; set; }
 
 
