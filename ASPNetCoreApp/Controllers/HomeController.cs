@@ -29,8 +29,6 @@ namespace ASPNetCoreApp.Controllers
 
         public IActionResult Login() => View();
 
-        public IActionResult Shop() => View();
-
         public IActionResult ProductDetails() => View();
     }
 }
