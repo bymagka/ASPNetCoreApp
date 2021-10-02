@@ -83,7 +83,7 @@ namespace ASPNetCoreApp.Controllers
 
             var emp = employeeService.GetById((int)id);
 
-            //if(emp is null) return RedirectToAction("PageNotFound", "Home");
+            if (emp is null) return RedirectToAction("PageNotFound", "Home");
 
             var model = new EmployeeViewModel
             {
