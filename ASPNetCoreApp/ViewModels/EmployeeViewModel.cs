@@ -21,6 +21,7 @@ namespace ASPNetCoreApp.ViewModels
         [Range(minimum:10,maximum:200, ErrorMessage = "На этом сайте нечего делать детям")]
         public int Age { get; set; }
 
+        [Display(Name = "День рождения")]
         [DataType(DataType.Date)]
         public DateTime BirthdayDate { get; set; }
     }

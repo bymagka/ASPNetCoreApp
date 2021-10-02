@@ -23,6 +23,10 @@
     {
       "library": "jquery-validation-unobtrusive@3.2.12",
       "destination": "wwwroot/lib/jquery/"
+    },
+    {
+      "library": "gmaps.js@0.4.25",
+      "destination": "wwwroot/lib/gmaps/"
     }
   ]
 }

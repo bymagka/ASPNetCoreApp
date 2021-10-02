@@ -38,7 +38,7 @@ namespace ASPNetCoreApp.Controllers
 
             if (employee is null) return RedirectToAction("PageNotFound", "Home");
 
-            return View(employee);
+            return View(new EmployeeViewModel{BirthdayDate = employee.BirthdayDate});
         }
 
         public IActionResult Create()
