@@ -21,7 +21,7 @@ namespace ASPNetCoreApp
         {
             services.AddSingleton<IEmployeeService, EmployeesManagementService>();
             services.AddSingleton<IProductData, ProductDataManagementService>();
-
+            
             services.AddControllersWithViews()
                     .AddRazorRuntimeCompilation();
         }
@@ -43,6 +43,8 @@ namespace ASPNetCoreApp
 
             app.UseStaticFiles();
             app.UseRouting();
+            app.UseStatusCodePagesWithRedirects("/home/PageNotFound");
+            
 
             app.UseEndpoints(endpoints =>
             {

@@ -32,8 +32,6 @@ namespace ASPNetCoreApp.Controllers
         public IActionResult Details(int? id)
         {
 
-            if (id is null) return RedirectToAction("PageNotFound", "Home");
-
             var employee = employeeService.GetById((int)id);
 
             if (employee is null) return RedirectToAction("PageNotFound", "Home");
@@ -49,14 +47,12 @@ namespace ASPNetCoreApp.Controllers
         #region Delete
         public IActionResult Delete(int? id)
         {
-            if (id is null) return RedirectToAction("PageNotFound", "Home");
-
-            if ((int)id < 0) return RedirectToAction("PageNotFound", "Home");
+           
 
             var emp = employeeService.GetById((int)id);
 
             if (emp is null) return RedirectToAction("PageNotFound", "Home");
-            
+
             var model = new EmployeeViewModel
             {
                 Id = emp.Id,
@@ -83,11 +79,11 @@ namespace ASPNetCoreApp.Controllers
         //GET
         public IActionResult Edit(int? id)
         {
-            if (id is null) return RedirectToAction("PageNotFound", "Home");
+            
 
             var emp = employeeService.GetById((int)id);
 
-            if(emp is null) return RedirectToAction("PageNotFound", "Home");
+            //if(emp is null) return RedirectToAction("PageNotFound", "Home");
 
             var model = new EmployeeViewModel
             {
