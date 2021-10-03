@@ -109,6 +109,28 @@ namespace ASPNetCoreApp.Data
                 }
                 logger.LogInformation("Инициализация товаров выполнена успешно");
             }
+
+
+            if (dbContext.Employees.Any())
+            {
+                logger.LogInformation("Пользователи уже заполнены");
+
+            }
+            else
+            {
+                logger.LogInformation("Инициализация пользователей");
+                await using (await dbContext.Database.BeginTransactionAsync())
+                {
+
+                    dbContext.Employees.AddRange(TestData.EmployeesList);
+
+                    await dbContext.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Employees] ON");
+                    await dbContext.SaveChangesAsync();
+                    await dbContext.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Employees] OFF");
+                    await dbContext.Database.CommitTransactionAsync();
+                }
+                logger.LogInformation("Инициализация пользователей выполнена успешно");
+            }
         }
     }
 }

@@ -11,6 +11,9 @@ namespace ASPNetCoreApp.DAL.Context
 
         public DbSet<Section> Sections { get; set; }
 
+
+        public DbSet<Employee> Employees { get; set; }
+
         public ASPNetCoreAPPDb(DbContextOptions options) : base(options)
         {
 

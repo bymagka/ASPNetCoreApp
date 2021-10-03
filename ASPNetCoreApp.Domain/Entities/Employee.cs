@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ASPNetCoreApp.Domain.Entities
 {
-    [Index(Name = nameof(LastName))]
+    [Index(nameof(LastName),IsUnique = true)]
     public class Employee : NamedEntity
     { 
 
