@@ -22,6 +22,7 @@ namespace ASPNetCoreApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ASPNetCoreAPPDb>(opt => opt.UseSqlServer(Configuration.GetConnectionString("TininBase")));
+            services.AddTransient<ASPNetCoreAPPDb>();
 
             services.AddSingleton<IEmployeeService, EmployeesManagementService>();
             services.AddSingleton<IProductData, ProductDataManagementService>();
