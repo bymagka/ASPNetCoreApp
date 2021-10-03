@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using ASPNetCoreApp.Domain.Entities.Base;
+using Microsoft.EntityFrameworkCore;
 
-namespace ASPNetCoreApp.Models
+namespace ASPNetCoreApp.Domain.Entities
 {
-    public class Employee
-    {
-        public int Id { get; set; }
-
-        public string FirstName { get; set; }
+    [Index(Name = nameof(LastName))]
+    public class Employee : NamedEntity
+    { 
 
         public string LastName { get; set; }
 

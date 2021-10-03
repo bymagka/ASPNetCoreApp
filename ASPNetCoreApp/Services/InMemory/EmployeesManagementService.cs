@@ -1,5 +1,5 @@
 ﻿using ASPNetCoreApp.Services.Interfaces;
-using ASPNetCoreApp.Models;
+using ASPNetCoreApp.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -67,7 +67,7 @@ namespace ASPNetCoreApp.Services
 
             if (db_employee is null) return;
 
-            db_employee.FirstName = emp.FirstName;
+            db_employee.Name = emp.Name;
             db_employee.LastName = emp.LastName;
             db_employee.BirthdayDate = emp.BirthdayDate;
             db_employee.Age = emp.Age;

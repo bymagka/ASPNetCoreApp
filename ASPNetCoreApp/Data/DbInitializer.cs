@@ -46,49 +46,69 @@ namespace ASPNetCoreApp.Data
 
             if (dbContext.Sections.Any())
             {
-                logger.LogInformation("БД уже заполнена");
-                return;
+                logger.LogInformation("Секции уже заполнены");
+                
             }
-
-            logger.LogInformation("Инициализация секций");
-            await using (await dbContext.Database.BeginTransactionAsync())
+            else
             {
+                logger.LogInformation("Инициализация секций");
+                await using (await dbContext.Database.BeginTransactionAsync())
+                {
 
-                dbContext.Sections.AddRange(TestData.Sections);
+                    dbContext.Sections.AddRange(TestData.Sections);
 
-                await dbContext.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Sections] ON");
-                await dbContext.SaveChangesAsync();
-                await dbContext.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Sections] OFF");
-                await dbContext.Database.CommitTransactionAsync();
+                    await dbContext.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Sections] ON");
+                    await dbContext.SaveChangesAsync();
+                    await dbContext.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Sections] OFF");
+                    await dbContext.Database.CommitTransactionAsync();
+                }
+                logger.LogInformation("Инициализация секций выполнена успешно");
             }
-            logger.LogInformation("Инициализация секций выполнена успешно");
 
 
-            logger.LogInformation("Инициализация брендов");
-            await using (await dbContext.Database.BeginTransactionAsync())
+
+            if (dbContext.Brands.Any())
             {
+                logger.LogInformation("Бренды уже заполнены");
 
-                dbContext.Brands.AddRange(TestData.Brands);
-
-                await dbContext.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Brands] ON");
-                await dbContext.SaveChangesAsync();
-                await dbContext.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Brands] OFF");
-                await dbContext.Database.CommitTransactionAsync();
             }
-            logger.LogInformation("Инициализация брендов выполнена успешно");
-
-            logger.LogInformation("Инициализация товаров");
-            await using (await dbContext.Database.BeginTransactionAsync())
+            else
             {
+                logger.LogInformation("Инициализация брендов");
+                await using (await dbContext.Database.BeginTransactionAsync())
+                {
 
-                dbContext.Products.AddRange(TestData.Products);
+                    dbContext.Brands.AddRange(TestData.Brands);
 
-                await dbContext.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Products] ON");
-                await dbContext.SaveChangesAsync();
-                await dbContext.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Products] OFF");
-                await dbContext.Database.CommitTransactionAsync();
+                    await dbContext.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Brands] ON");
+                    await dbContext.SaveChangesAsync();
+                    await dbContext.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Brands] OFF");
+                    await dbContext.Database.CommitTransactionAsync();
+                }
+                logger.LogInformation("Инициализация брендов выполнена успешно");
             }
-            logger.LogInformation("Инициализация товаров выполнена успешно");
+
+
+            if (dbContext.Products.Any())
+            {
+                logger.LogInformation("Бренды уже заполнены");
+
+            }
+            else
+            {
+                logger.LogInformation("Инициализация товаров");
+                await using (await dbContext.Database.BeginTransactionAsync())
+                {
+
+                    dbContext.Products.AddRange(TestData.Products);
+
+                    await dbContext.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Products] ON");
+                    await dbContext.SaveChangesAsync();
+                    await dbContext.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Products] OFF");
+                    await dbContext.Database.CommitTransactionAsync();
+                }
+                logger.LogInformation("Инициализация товаров выполнена успешно");
+            }
         }
     }
 }

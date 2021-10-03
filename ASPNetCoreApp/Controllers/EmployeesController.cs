@@ -3,11 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ASPNetCoreApp.Models;
 using ASPNetCoreApp.Data;
 using ASPNetCoreApp.Services.Interfaces;
 using Microsoft.Extensions.Logging;
 using ASPNetCoreApp.ViewModels;
+using ASPNetCoreApp.Domain.Entities;
 
 namespace ASPNetCoreApp.Controllers
 {
@@ -26,7 +26,14 @@ namespace ASPNetCoreApp.Controllers
 
         public IActionResult Index()
         {
-            return View(employeeService.GetAll());
+            return View(employeeService.GetAll().Select(x=> new EmployeeViewModel 
+                                                        { 
+                                                           Age = x.Age,
+                                                           BirthdayDate = x.BirthdayDate,
+                                                           FirstName = x.Name,
+                                                           LastName = x.LastName,
+                                                           Id = x.Id,
+                                                        }));
         }
 
         public IActionResult Details(int? id)
@@ -57,7 +64,7 @@ namespace ASPNetCoreApp.Controllers
             {
                 Id = emp.Id,
                 Age = emp.Age,
-                FirstName = emp.FirstName,
+                FirstName = emp.Name,
                 LastName = emp.LastName,
                 BirthdayDate = emp.BirthdayDate,
             };
@@ -88,7 +95,7 @@ namespace ASPNetCoreApp.Controllers
             var model = new EmployeeViewModel
             {
                 Age = emp.Age,
-                FirstName = emp.FirstName,
+                FirstName = emp.Name,
                 LastName = emp.LastName,
                 BirthdayDate = emp.BirthdayDate,
             };
@@ -108,7 +115,7 @@ namespace ASPNetCoreApp.Controllers
             {
                 Id = empModel.Id,
                 Age = empModel.Age,
-                FirstName = empModel.FirstName,
+                Name = empModel.FirstName,
                 LastName = empModel.LastName,
                 BirthdayDate = empModel.BirthdayDate,
             };

@@ -1,4 +1,4 @@
-﻿using ASPNetCoreApp.Models;
+﻿using ASPNetCoreApp.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
