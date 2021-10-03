@@ -4,25 +4,37 @@ using System.Linq;
 using System.Threading.Tasks;
 using ASPNetCoreApp.DAL.Context;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace ASPNetCoreApp.Data
 {
     public class DbInitializer
     {
-        private readonly ASPNetCoreAPPDb dbContext;
 
-        public DbInitializer(ASPNetCoreAPPDb context)
+        private readonly ASPNetCoreAPPDb dbContext;
+        private readonly ILogger<DbInitializer> logger;
+
+        public DbInitializer(ASPNetCoreAPPDb context,ILogger<DbInitializer> logger)
         {
             dbContext = context;
+            this.logger = logger;
         }
 
         public async Task InitializeAsync()
         {
-            var pendingMigrations = await dbContext.Database.GetPendingMigrationsAsync();
-            var appliedMigrations = await dbContext.Database.GetAppliedMigrationsAsync();
 
-            if(pendingMigrations.Any())
-                 await dbContext.Database.MigrateAsync();
+            logger.LogInformation("Инициализация начата");
+
+            var pendingMigrations = await dbContext.Database.GetPendingMigrationsAsync();
+            //var appliedMigrations = await dbContext.Database.GetAppliedMigrationsAsync();
+
+            if (pendingMigrations.Any())
+            {
+                logger.LogInformation("Применение миграций: {0}", string.Join(",", pendingMigrations));
+
+                await dbContext.Database.MigrateAsync();
+            }
+                 
 
             await InitializeProductsAsync();
         }
@@ -31,6 +43,14 @@ namespace ASPNetCoreApp.Data
 
         public async Task InitializeProductsAsync()
         {
+
+            if (dbContext.Sections.Any())
+            {
+                logger.LogInformation("БД уже заполнена");
+                return;
+            }
+
+            logger.LogInformation("Инициализация секций");
             await using (await dbContext.Database.BeginTransactionAsync())
             {
 
@@ -41,28 +61,34 @@ namespace ASPNetCoreApp.Data
                 await dbContext.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Sections] OFF");
                 await dbContext.Database.CommitTransactionAsync();
             }
+            logger.LogInformation("Инициализация секций выполнена успешно");
 
+
+            logger.LogInformation("Инициализация брендов");
             await using (await dbContext.Database.BeginTransactionAsync())
             {
 
                 dbContext.Brands.AddRange(TestData.Brands);
 
-                await dbContext.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Sections] ON");
+                await dbContext.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Brands] ON");
                 await dbContext.SaveChangesAsync();
-                await dbContext.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Sections] OFF");
+                await dbContext.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Brands] OFF");
                 await dbContext.Database.CommitTransactionAsync();
             }
+            logger.LogInformation("Инициализация брендов выполнена успешно");
 
+            logger.LogInformation("Инициализация товаров");
             await using (await dbContext.Database.BeginTransactionAsync())
             {
 
                 dbContext.Products.AddRange(TestData.Products);
 
-                await dbContext.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Sections] ON");
+                await dbContext.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Products] ON");
                 await dbContext.SaveChangesAsync();
-                await dbContext.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Sections] OFF");
+                await dbContext.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Products] OFF");
                 await dbContext.Database.CommitTransactionAsync();
             }
+            logger.LogInformation("Инициализация товаров выполнена успешно");
         }
     }
 }
