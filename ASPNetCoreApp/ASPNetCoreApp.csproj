@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ASPNetCoreApp.DAL\ASPNetCoreApp.DAL.csproj" />
     <ProjectReference Include="..\ASPNetCoreApp.Domain\ASPNetCoreApp.Domain.csproj" />
   </ItemGroup>
 
