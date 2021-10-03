@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using ASPNetCoreApp.Services.Interfaces;
 using ASPNetCoreApp.Services;
+using ASPNetCoreApp.DAL.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace ASPNetCoreApp
 {
@@ -19,9 +21,12 @@ namespace ASPNetCoreApp
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<ASPNetCoreAPPDb>(opt => opt.UseSqlServer(Configuration.GetConnectionString("TininBase")));
+
             services.AddSingleton<IEmployeeService, EmployeesManagementService>();
             services.AddSingleton<IProductData, ProductDataManagementService>();
-            
+          
+
             services.AddControllersWithViews()
                     .AddRazorRuntimeCompilation();
         }

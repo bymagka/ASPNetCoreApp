@@ -3,7 +3,7 @@ using ASPNetCoreApp.Domain.Entities;
 
 namespace ASPNetCoreApp.DAL.Context
 {
-    class ASPNetCoreAPPDb : DbContext
+    public class ASPNetCoreAPPDb : DbContext
     {
         public DbSet<Product> Products { get; set; }
 
