@@ -10,6 +10,9 @@ using ASPNetCoreApp.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using ASPNetCoreApp.Data;
 using ASPNetCoreApp.Services.InSQL;
+using ASPNetCoreApp.Domain.Identity;
+using Microsoft.AspNetCore.Identity;
+using System;
 
 namespace ASPNetCoreApp
 {
@@ -21,6 +24,40 @@ namespace ASPNetCoreApp
         {
             services.AddDbContext<ASPNetCoreAPPDb>(opt => opt.UseSqlServer(Configuration.GetConnectionString("TininBase")));
             services.AddTransient<DbInitializer>();
+
+
+            services.AddIdentity<User, Role>()
+                    .AddEntityFrameworkStores<ASPNetCoreAPPDb>()
+                    .AddDefaultTokenProviders();
+
+            services.Configure<IdentityOptions>(op =>
+            {
+#if DEBUG
+                op.Password.RequireDigit = false;
+                op.Password.RequireLowercase = false;
+                op.Password.RequireUppercase = false;
+                op.Password.RequireNonAlphanumeric = false;
+                op.Password.RequiredLength = 3;
+                op.Password.RequiredUniqueChars = 3;
+#endif
+                op.User.RequireUniqueEmail = false;
+                
+
+                op.Lockout.AllowedForNewUsers = false;
+                op.Lockout.MaxFailedAccessAttempts = 10;
+                op.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
+            });
+
+            services.ConfigureApplicationCookie(ck =>
+            {
+                ck.Cookie.Name = "ASPNetCoreApp";
+                ck.Cookie.HttpOnly = true;
+                ck.ExpireTimeSpan = TimeSpan.FromDays(10);
+                ck.LoginPath = "/Account/Login";
+                ck.LogoutPath = "/Account/Logout";
+
+                ck.SlidingExpiration = true;
+            });
 
             //services.AddSingleton<IEmployeeService, EmployeesManagementService>();
             //services.AddSingleton<IProductData, ProductDataManagementService>();
@@ -49,6 +86,10 @@ namespace ASPNetCoreApp
 
             app.UseStaticFiles();
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+
             app.UseStatusCodePagesWithRedirects("/home/PageNotFound");
             
 
