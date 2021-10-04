@@ -31,10 +31,11 @@ namespace ASPNetCoreApp.Services.InSQL
 
             if (db.Employees.Contains(emp)) return emp.Id;
 
-            db.Employees.Add(emp);
+            
 
             using (db.Database.BeginTransaction())
             {
+                db.Employees.Add(emp);
                 db.SaveChanges();
                 db.Database.CommitTransaction();
             }
@@ -48,13 +49,15 @@ namespace ASPNetCoreApp.Services.InSQL
 
             if (emp is null) return false;
 
-            db.Employees.Remove(emp);
+            
 
             using (db.Database.BeginTransaction())
             {
+                db.Employees.Remove(emp);
                 db.SaveChanges();
-                _Logger.LogInformation("Сотрудник удален с БД");
+                
                 db.Database.CommitTransaction();
+                _Logger.LogInformation("Сотрудник удален с БД");
             }
 
             return true;
@@ -79,15 +82,13 @@ namespace ASPNetCoreApp.Services.InSQL
             var db_employee = GetById(emp.Id);
               
             if (db_employee is null) return;
-            db.Employees.Update(db_employee);
-
-            db_employee.Name = emp.Name;
-            db_employee.LastName = emp.LastName;
-            db_employee.BirthdayDate = emp.BirthdayDate;
-            db_employee.Age = emp.Age;
-
+           
             using (db.Database.BeginTransaction())
             {
+                db_employee.Name = emp.Name;
+                db_employee.LastName = emp.LastName;
+                db_employee.BirthdayDate = emp.BirthdayDate;
+                db_employee.Age = emp.Age;
 
                 db.SaveChanges();
                 db.Database.CommitTransaction();
