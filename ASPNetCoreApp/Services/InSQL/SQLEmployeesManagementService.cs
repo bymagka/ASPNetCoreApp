@@ -33,10 +33,11 @@ namespace ASPNetCoreApp.Services.InSQL
 
             db.Employees.Add(emp);
 
-            //using (db.Database.BeginTransaction())
-            //{
+            using (db.Database.BeginTransaction())
+            {
                 db.SaveChanges();
-            //}
+                db.Database.CommitTransaction();
+            }
 
             return emp.Id;
         }
@@ -49,11 +50,12 @@ namespace ASPNetCoreApp.Services.InSQL
 
             db.Employees.Remove(emp);
 
-            //using (db.Database.BeginTransaction())
-            //{
+            using (db.Database.BeginTransaction())
+            {
                 db.SaveChanges();
                 _Logger.LogInformation("Сотрудник удален с БД");
-            //}
+                db.Database.CommitTransaction();
+            }
 
             return true;
         }
@@ -84,11 +86,12 @@ namespace ASPNetCoreApp.Services.InSQL
             db_employee.BirthdayDate = emp.BirthdayDate;
             db_employee.Age = emp.Age;
 
-            //using (db.Database.BeginTransaction())
-            //{
+            using (db.Database.BeginTransaction())
+            {
 
                 db.SaveChanges();
-            //}
+                db.Database.CommitTransaction();
+            }
         }
     }
 }
