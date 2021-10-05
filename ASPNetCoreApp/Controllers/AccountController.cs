@@ -49,15 +49,32 @@ namespace ASPNetCoreApp.Controllers
         #endregion
 
 
+        #region Login
+        public IActionResult Login(string returnUrl) => View(new LoginViewModel { ReturnUrl = returnUrl });
 
-        public IActionResult Login() => View();
 
-        
+        [HttpPost,AutoValidateAntiforgeryToken]
+        public async Task<IActionResult> Login(LoginViewModel model)
+        {
+            var loginResult = await signInManager.PasswordSignInAsync(model.Login,model.Password,model.RememberMe,false);
 
-       
+
+            if (loginResult.Succeeded)
+                return LocalRedirect(model.ReturnUrl ?? "/home/index");
+
+            ModelState.AddModelError("", "Ошибка аутентификации");
+
+            return View(model);
+
+        }
+        #endregion
 
         public IActionResult AccessDenied() => View();
 
-        public IActionResult Logout() => RedirectToAction("Index","Home");
+        public async Task<IActionResult> Logout() 
+        {
+            await signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        } 
     }
 }
