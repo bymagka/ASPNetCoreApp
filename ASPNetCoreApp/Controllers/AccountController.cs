@@ -1,10 +1,8 @@
 ﻿using ASPNetCoreApp.Domain.Identity;
+using ASPNetCoreApp.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace ASPNetCoreApp.Controllers
 {
@@ -19,12 +17,21 @@ namespace ASPNetCoreApp.Controllers
             this.signInManager = signInManager;
         }
 
+        #region Register
+        public IActionResult Register() => View(new UserIdentityViewModel());
+
+
+        [HttpPost]
+        public IActionResult Register(UserIdentityViewModel usr) => RedirectToAction("Home", "Index");
+        #endregion
+
+
 
         public IActionResult Login() => View();
 
         
 
-        public IActionResult Register() => View();
+       
 
         public IActionResult AccessDenied() => View();
 
