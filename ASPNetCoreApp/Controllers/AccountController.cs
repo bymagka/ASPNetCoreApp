@@ -2,7 +2,7 @@
 using ASPNetCoreApp.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-
+using System.Threading.Tasks;
 
 namespace ASPNetCoreApp.Controllers
 {
@@ -18,11 +18,34 @@ namespace ASPNetCoreApp.Controllers
         }
 
         #region Register
+
         public IActionResult Register() => View(new UserIdentityViewModel());
 
 
-        [HttpPost]
-        public IActionResult Register(UserIdentityViewModel usr) => RedirectToAction("Home", "Index");
+        [HttpPost,ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register(UserIdentityViewModel usr)
+        {
+            var user = new User() { UserName = usr.Login };
+
+
+            var registerResult = await userManager.CreateAsync(user, usr.Password);
+
+            if (registerResult.Succeeded)
+            {
+                await signInManager.SignInAsync(user,false);
+
+                return RedirectToAction("Index", "Home");
+            }
+
+
+            foreach(var item in registerResult.Errors)
+            {
+                ModelState.AddModelError("", item.Description);
+            }
+
+            return View(usr);
+        }
+
         #endregion
 
 
