@@ -1,11 +1,13 @@
 ﻿using ASPNetCoreApp.Domain.Identity;
 using ASPNetCoreApp.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace ASPNetCoreApp.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
         private readonly UserManager<User> userManager;
@@ -18,10 +20,10 @@ namespace ASPNetCoreApp.Controllers
         }
 
         #region Register
-
+        [AllowAnonymous]
         public IActionResult Register() => View(new UserIdentityViewModel());
 
-
+        [AllowAnonymous]
         [HttpPost,ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(UserIdentityViewModel usr)
         {
@@ -49,11 +51,11 @@ namespace ASPNetCoreApp.Controllers
 
         #endregion
 
-
+        [AllowAnonymous]
         #region Login
         public IActionResult Login(string returnUrl) => View(new LoginViewModel { ReturnUrl = returnUrl });
 
-
+        [AllowAnonymous]
         [HttpPost,AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
@@ -69,7 +71,7 @@ namespace ASPNetCoreApp.Controllers
 
         }
         #endregion
-
+        [AllowAnonymous]
         public IActionResult AccessDenied() => View();
 
         public async Task<IActionResult> Logout() 
