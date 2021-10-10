@@ -1,5 +1,7 @@
 ﻿@using ASPNetCoreApp.Services.Interfaces
- 
+@{ 
+    ViewBag.Title= "Index";
+}
 @inject IProductData ProductData
 @{ 
     var products = ProductData.GetProducts()

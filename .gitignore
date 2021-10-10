@@ -362,3 +362,9 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 **/wwwroot/lib
+/ASPNetCoreApp/Список ошибок
+/ASPNetCoreApp/wwwroot/js/site.min.js.gz
+/ASPNetCoreApp/wwwroot/js/site.min.js
+/ASPNetCoreApp/wwwroot/js/site.js
+/ASPNetCoreApp/wwwroot/css/site.min.css
+/ASPNetCoreApp/wwwroot/css/site.css
