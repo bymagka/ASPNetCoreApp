@@ -33,6 +33,7 @@ namespace ASPNetCoreApp.Controllers
             if (registerResult.Succeeded)
             {
                 await signInManager.SignInAsync(user,false);
+                await userManager.AddToRoleAsync(user, Role.Users);
 
                 return RedirectToAction("Index", "Home");
             }
