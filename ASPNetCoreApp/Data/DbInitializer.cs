@@ -4,8 +4,10 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using ASPNetCoreApp.DAL.Context;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using ASPNetCoreApp.Domain.Identity;
 
 namespace ASPNetCoreApp.Data
 {
@@ -14,11 +16,15 @@ namespace ASPNetCoreApp.Data
 
         private readonly ASPNetCoreAPPDb dbContext;
         private readonly ILogger<DbInitializer> logger;
+        private readonly UserManager<User> userManager;
+        private readonly RoleManager<Role> roleManager;
 
-        public DbInitializer(ASPNetCoreAPPDb context,ILogger<DbInitializer> logger)
+        public DbInitializer(ASPNetCoreAPPDb context,ILogger<DbInitializer> logger,UserManager<User> userManager,RoleManager<Role> roleManager)
         {
             dbContext = context;
             this.logger = logger;
+            this.userManager = userManager;
+            this.roleManager = roleManager;
         }
 
         public async Task InitializeAsync()
@@ -35,14 +41,85 @@ namespace ASPNetCoreApp.Data
 
                 await dbContext.Database.MigrateAsync();
             }
-                 
 
-            await InitializeProductsAsync();
+            try
+            {
+                await InitializeProductsAsync();
+            }
+            catch (Exception)
+            {
+
+                logger.LogInformation("Ошибка инициализации каталога товаров");
+                throw;
+            }
+
+            try
+            {
+                await InitializeIdentityAsync();
+            }
+            catch (Exception)
+            {
+                logger.LogInformation("Ошибка инициализации каталога пользователей");
+            }
+           
         }
 
+        private async Task InitializeIdentityAsync()
+        {
+            var timer = Stopwatch.StartNew();
+            logger.LogInformation("Инициализация identity");
 
+            async Task CheckRole(string roleName)
+            {
+                if(await roleManager.RoleExistsAsync(roleName))
+                {
+                    logger.LogInformation($"Роль {roleName} существует");
+                  
+                }
+                else
+                {
+                    logger.LogInformation($"Роль {roleName} не существует");
+                    await roleManager.CreateAsync(new Role { Name = roleName });
+                    logger.LogInformation($"Роль {roleName} создана");
+                }
+            }
 
-        public async Task InitializeProductsAsync()
+            await CheckRole(Role.Administrators);
+            await CheckRole(Role.Users);
+
+            if(await userManager.FindByNameAsync(User.Administrator) is null)
+            {
+                logger.LogInformation($"Пользователь {User.Administrator} не существует");
+
+                User admin = new User
+                {
+                    UserName = User.Administrator
+                };
+
+                var creation_result = await userManager.CreateAsync(admin,User.DefaultAdminPass);
+
+                if (creation_result.Succeeded)
+                {
+                    logger.LogInformation($"Пользователь {admin.UserName} создан");
+                    await userManager.AddToRoleAsync(admin, Role.Administrators);
+                    logger.LogInformation($"Пользователю {admin.UserName} добавлена роль {Role.Administrators}");
+                }
+                else
+                {
+                    var errors = creation_result.Errors.Select(x => x.Description).ToArray();
+
+                    string errorMessage = $"Ошибка при создании пользователя администратор! Ошибки {string.Join(", ", errors)}";
+
+                    logger.LogInformation(errorMessage);
+
+                    throw new InvalidOperationException(errorMessage);
+                }
+            }
+
+            logger.LogInformation($"Инициализация identity была произведена за {timer.Elapsed.TotalMilliseconds} мс");
+        }
+
+        private async Task InitializeProductsAsync()
         {
             var timer = Stopwatch.StartNew();
 
