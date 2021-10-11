@@ -1,15 +1,14 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 using ASPNetCoreApp.Services.Interfaces;
-using ASPNetCoreApp.Services;
 using ASPNetCoreApp.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using ASPNetCoreApp.Data;
 using ASPNetCoreApp.Services.InSQL;
+using ASPNetCoreApp.Services.InCookies;
 using ASPNetCoreApp.Domain.Identity;
 using Microsoft.AspNetCore.Identity;
 using System;
@@ -63,6 +62,7 @@ namespace ASPNetCoreApp
             //services.AddSingleton<IProductData, ProductDataManagementService>();
             services.AddScoped<IEmployeeService, SQLEmployyesManagementService>();
             services.AddScoped<IProductData, SQLProductDataService>();
+            services.AddScoped<ICartService, InCookiesCartService>();
           
 
             services.AddControllersWithViews()

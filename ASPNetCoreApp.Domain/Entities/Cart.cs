@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace ASPNetCoreApp.Domain.Entities
 {
-    class Cart
+    public class Cart
     {
         public ICollection<CartItem> CartItems => new List<CartItem>();
 

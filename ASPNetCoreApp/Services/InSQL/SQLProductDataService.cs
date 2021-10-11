@@ -32,12 +32,18 @@ namespace ASPNetCoreApp.Services.InSQL
         {
             IQueryable<Product> query = db.Products.Include(x=>x.Brand).Include(x=>x.Section);
 
-            if (filter?.BrandId != null)
-                query = query.Where(x => x.BrandId == filter.BrandId);
+            if (filter.Ids.Length > 0)
+            {
+                query.Where(x => filter.Ids.Contains(x.Id));
+            }
+            else
+            {
+                if (filter?.BrandId != null)
+                    query = query.Where(x => x.BrandId == filter.BrandId);
 
-            if (filter?.SectionId != null)
-                query = query.Where(x => x.SectionId == filter.SectionId);
-
+                if (filter?.SectionId != null)
+                    query = query.Where(x => x.SectionId == filter.SectionId);
+            }
             return query;
         }
 
