@@ -32,7 +32,7 @@ namespace ASPNetCoreApp.Services.InSQL
         {
             IQueryable<Product> query = db.Products.Include(x=>x.Brand).Include(x=>x.Section);
 
-            if (filter.Ids.Length > 0)
+            if (filter?.Ids?.Length > 0)
             {
                 query.Where(x => filter.Ids.Contains(x.Id));
             }

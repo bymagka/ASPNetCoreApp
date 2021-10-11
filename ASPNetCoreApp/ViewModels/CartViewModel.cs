@@ -11,6 +11,6 @@ namespace ASPNetCoreApp.ViewModels
 
         public int ItemsCount => ItemsList?.Sum(x => x.Quantity) ?? 0;
 
-        public decimal TotalPrice => ItemsList?.Sum(x => x.product.Price * x.Quantity) ?? 0;
+        public decimal TotalPrice => ItemsList?.Sum(x => x.product.Price * x.Quantity) ?? 0m;
     }
 }

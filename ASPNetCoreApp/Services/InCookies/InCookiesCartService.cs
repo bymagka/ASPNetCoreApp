@@ -64,7 +64,7 @@ namespace ASPNetCoreApp.Services.InCookies
             var cartItem = _cart.CartItems.FirstOrDefault(ct => ct.ProductId == id);
 
             if (ReferenceEquals(cartItem, null))
-                Cart.CartItems.Add(new CartItem { ProductId = id, Quantity = 1 });
+                _cart.CartItems.Add(new CartItem { ProductId = id, Quantity = 1 });
             else
                 cartItem.Quantity++;
 

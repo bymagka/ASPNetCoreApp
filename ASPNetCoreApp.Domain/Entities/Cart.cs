@@ -6,7 +6,7 @@ namespace ASPNetCoreApp.Domain.Entities
 {
     public class Cart
     {
-        public ICollection<CartItem> CartItems => new List<CartItem>();
+        public ICollection<CartItem> CartItems = new List<CartItem>();
 
         public int ItemsCount => CartItems?.Sum(it => it.Quantity) ?? 0;
     }
