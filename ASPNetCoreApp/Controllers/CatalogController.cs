@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ASPNetCoreApp.Domain;
 using ASPNetCoreApp.Services.Interfaces;
 using ASPNetCoreApp.ViewModels;
+using ASPNetCoreApp.Infostructure.Mappers;
 
 namespace ASPNetCoreApp.Controllers
 {
@@ -30,16 +31,19 @@ namespace ASPNetCoreApp.Controllers
             {
                 BrandId = BrandId,
                 SectionId = SectionId,
-                Products = products.OrderBy(x => x.Order).Select(p => new ProductViewModel
-                {
-                    Id = p.Id,
-                    ImageUrl = p.ImageUrl,
-                    Name = p.Name,
-                    Price = p.Price
-                })
+                Products = products.OrderBy(x => x.Order).ToView()
             };
 
             return View(catalogViewModel);
+        }
+   
+        public IActionResult Details(int id)
+        {
+            var prod = ProductData.GetProductById(id);
+
+            if (prod is null) return NotFound();
+
+            return View(prod.ToView());
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<ProductViewModel>
-
+@{ 
+    ViewBag.Title = "Детали товара";
+}
 
 <div class="features_items">
     <!--features_items-->
@@ -12,13 +14,19 @@
                     <div class="productinfo text-center">
                         <img src="~/images/shop/@product.ImageUrl" alt="@product.Name" />
                         <h2>@product.Price</h2>
-                        <p>@product.Name</p>
+                        <p>
+                            <a asp-controller="Catalog" asp-action="Details" asp-route-Id="@product.Id" />
+                            @product.Name
+                        </p>
                         <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>В корзину</a>
                     </div>
                     <div class="product-overlay">
                         <div class="overlay-content">
                             <h2>@product.Price</h2>
-                            <p>@product.Name</p>
+                            <p >
+                                <a asp-controller="Catalog" asp-action="Details" asp-route-Id="@product.Id"/>
+                                @product.Name
+                            </p>
                             <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>В корзину</a>
                         </div>
                     </div>
@@ -31,5 +39,5 @@
                 </div>
             </div>
         </div>
-     }
+    }
 </div><!--features_items-->

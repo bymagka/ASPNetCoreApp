@@ -31,5 +31,12 @@ namespace ASPNetCoreApp.Services
 
             return query;
         }
+
+        public Product GetProductById(int id) => TestData.Products.FirstOrDefault(prod => prod.Id == id);
+
+        public Brand GetBrandById(int id) => TestData.Brands.FirstOrDefault(br => br.Id == id);
+
+        public Section GetSectionById(int id) => TestData.Sections.FirstOrDefault(br => br.Id == id);
+    
     }
 }

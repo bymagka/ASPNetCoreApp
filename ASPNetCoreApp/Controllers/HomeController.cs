@@ -13,9 +13,6 @@ namespace ASPNetCoreApp.Controllers
             return View();
         }
 
-        public IActionResult PageNotFound() {
-            return View();
-        }
 
         public IActionResult Blog() => View();
 
@@ -27,6 +24,6 @@ namespace ASPNetCoreApp.Controllers
 
         public IActionResult ContactUs() => View();
 
-        public IActionResult ProductDetails() => View();
+      
     }
 }

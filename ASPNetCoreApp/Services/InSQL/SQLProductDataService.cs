@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace ASPNetCoreApp.Services.InSQL
 {
@@ -18,11 +19,18 @@ namespace ASPNetCoreApp.Services.InSQL
             db = context;
         }
 
+        public Brand GetBrandById(int id) => db.Brands.FirstOrDefault(br => br.Id == id);
+
         public IEnumerable<Brand> GetBrands() => db.Brands;
+
+        public Product GetProductById(int id) => db.Products
+                                                        .Include(prod=>prod.Section)
+                                                        .Include(prod=>prod.Brand)
+                                                        .FirstOrDefault(prod => prod.Id == id);
 
         public IEnumerable<Product> GetProducts(ProductFilter filter = null)
         {
-            IQueryable<Product> query = db.Products;
+            IQueryable<Product> query = db.Products.Include(x=>x.Brand).Include(x=>x.Section);
 
             if (filter?.BrandId != null)
                 query = query.Where(x => x.BrandId == filter.BrandId);
@@ -32,6 +40,8 @@ namespace ASPNetCoreApp.Services.InSQL
 
             return query;
         }
+
+        public Section GetSectionById(int id) => db.Sections.FirstOrDefault(sect => sect.Id == id);
 
         public IEnumerable<Section> GetSections() => db.Sections;
     }

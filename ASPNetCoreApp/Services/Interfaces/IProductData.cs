@@ -11,5 +11,11 @@ namespace ASPNetCoreApp.Services.Interfaces
         IEnumerable<Section> GetSections();
 
         IEnumerable<Product> GetProducts(ProductFilter filter = null);
+
+        Product GetProductById(int id);
+
+        Brand GetBrandById(int id);
+
+        Section GetSectionById(int id);
     }
 }
