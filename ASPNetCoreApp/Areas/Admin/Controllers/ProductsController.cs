@@ -1,5 +1,7 @@
-﻿using ASPNetCoreApp.Infostructure.Mappers;
+﻿using ASPNetCoreApp.Domain.Identity;
+using ASPNetCoreApp.Infostructure.Mappers;
 using ASPNetCoreApp.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,9 +11,10 @@ using System.Threading.Tasks;
 namespace ASPNetCoreApp.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles=Role.Administrators)]
     public class ProductsController : Controller
     {
-        private IProductData productData;
+        private readonly IProductData productData;
 
         public ProductsController(IProductData productData)
         {
