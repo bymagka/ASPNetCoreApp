@@ -22,6 +22,6 @@ namespace ASPNetCoreApp.Controllers
 
         public IActionResult ContactUs() => View();
 
-      
+        public IActionResult PageNotFound() => View();
     }
 }
