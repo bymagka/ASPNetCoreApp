@@ -23,4 +23,17 @@ namespace ASPNetCoreApp.Infostructure.Mappers
         public static IEnumerable<ProductViewModel> ToView(this IEnumerable<Product> products) => products.Select(ToView);
 
     }
+
+    public static class OrderMapper
+    {
+        public static OrderViewModel ToView(this Order order)
+        {
+            return order is null ? null : new OrderViewModel
+            {
+
+            };
+        }
+
+        public static IEnumerable<OrderViewModel> ToView(this IEnumerable<Order> orders) => orders.Select(ToView);
+    }
 }
