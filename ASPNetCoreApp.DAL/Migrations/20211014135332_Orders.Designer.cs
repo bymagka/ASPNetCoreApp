@@ -4,14 +4,16 @@ using ASPNetCoreApp.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ASPNetCoreApp.DAL.Migrations
 {
     [DbContext(typeof(ASPNetCoreAPPDb))]
-    partial class ASPNetCoreAPPDbModelSnapshot : ModelSnapshot
+    [Migration("20211014135332_Orders")]
+    partial class Orders
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -17,6 +17,8 @@ namespace ASPNetCoreApp.DAL.Context
 
         public DbSet<Employee> Employees { get; set; }
 
+        public DbSet<Order> Orders { get; set; }
+
         public ASPNetCoreAPPDb(DbContextOptions options) : base(options)
         {
 
