@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ASPNetCoreApp.Domain.Entities;
 using ASPNetCoreApp.ViewModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace ASPNetCoreApp.Services.InSQL
 {
@@ -22,19 +23,74 @@ namespace ASPNetCoreApp.Services.InSQL
             this.dbContext = dbContext;
         }
 
-        public Task<Order> CreateOrder(string UserName, CartViewModel Cart, OrderViewModel OrderModel)
+        public async Task<Order> CreateOrder(string UserName, CartViewModel Cart, OrderViewModel OrderModel)
         {
-            throw new NotImplementedException();
+            var user = await userManager.FindByNameAsync(UserName).ConfigureAwait(false);
+
+            if(user is null)
+            {
+                throw new InvalidOperationException($"Пользователь {UserName} не найден");
+            }
+
+            await using var transaction = await dbContext.Database.BeginTransactionAsync();
+
+            Order order = new Order
+            {
+                User = user,
+                Adress = OrderModel.Adress,
+                Description = OrderModel.Description,
+                Phone = OrderModel.Phone,
+
+            };
+
+            var product_ids = Cart.ItemsList.Select(item => item.product.Id).ToArray();
+
+            var cartProducts = await dbContext.Products.Where(prod => product_ids.Contains(prod.Id)).ToArrayAsync();
+
+            order.Items = Cart.ItemsList.Join(cartProducts,
+                cartItem=>cartItem.product.Id,
+                cartProd=>cartProd.Id,
+                (cartItem,cartProd)=> new OrderItem { 
+                Order = order,
+                Product = cartProd,
+                Price = cartProd.Price,
+                Quantity = cartItem.Quantity
+                }).ToArray();
+
+            await dbContext.Orders.AddAsync(order);
+
+            await dbContext.SaveChangesAsync();
+
+            await transaction.CommitAsync();
+
+            return order;
+
         }
 
-        public Task<Order> GetOrderById(int id)
+        public async Task<Order> GetOrderById(int id)
         {
-            throw new NotImplementedException();
+            var order = await dbContext.Orders
+                .Include(o => o.User)
+                .Include(o => o.Items)
+                .ThenInclude(o => o.Product)
+                .FirstOrDefaultAsync(o => o.Id == id)
+                .ConfigureAwait(false);
+
+            return order;
         }
 
-        public Task<IEnumerable<Order>> GetUserOrders(string UserName)
+        public async Task<IEnumerable<Order>> GetUserOrders(string UserName)
         {
-            throw new NotImplementedException();
+            var orders = await dbContext.Orders
+                .Include(o => o.User)
+                .Include(o => o.Items)
+                .ThenInclude(o => o.Product)
+                .Where(o => o.User.UserName == UserName)
+                .ToArrayAsync()
+                .ConfigureAwait(false);
+
+            return orders;
+                
         }
     }
 }

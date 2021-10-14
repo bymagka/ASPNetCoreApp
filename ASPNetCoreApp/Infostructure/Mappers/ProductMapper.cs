@@ -30,7 +30,9 @@ namespace ASPNetCoreApp.Infostructure.Mappers
         {
             return order is null ? null : new OrderViewModel
             {
-
+                Adress = order.Adress,
+                Phone = order.Phone,
+                Description = order.Description,
             };
         }
 
