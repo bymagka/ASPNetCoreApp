@@ -63,6 +63,7 @@ namespace ASPNetCoreApp
             services.AddScoped<IEmployeeService, SQLEmployyesManagementService>();
             services.AddScoped<IProductData, SQLProductDataService>();
             services.AddScoped<ICartService, InCookiesCartService>();
+            services.AddScoped<IOrderService, SQLOrderService>();
           
 
             services.AddControllersWithViews()

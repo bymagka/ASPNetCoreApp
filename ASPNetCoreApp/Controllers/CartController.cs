@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ASPNetCoreApp.Services.InCookies;
 using ASPNetCoreApp.Services.Interfaces;
+using ASPNetCoreApp.ViewModels;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ASPNetCoreApp.Controllers
 {
@@ -39,7 +42,26 @@ namespace ASPNetCoreApp.Controllers
 
         public IActionResult Index()
         {
-            return View(cartService.GetViewModel());
+            return View(new CartOrderViewModel { CartViewModel = cartService.GetViewModel() }); ;
+        }
+
+
+        [Authorize]
+        [HttpPost,ValidateAntiForgeryToken]
+        public async Task<IActionResult> Checkout(OrderViewModel OrderModel, [FromServices] IOrderService orderService)
+        {
+            var order = await orderService.CreateOrder(User.Identity!.Name, cartService.GetViewModel(), OrderModel);
+
+            cartService.Clear();
+
+            return RedirectToAction(nameof(OrderConfirmed), new { order.Id });
+        }
+
+
+        public IActionResult OrderConfirmed(int id)
+        {
+            ViewBag.OrderId = id;
+            return View();
         }
     }
 }

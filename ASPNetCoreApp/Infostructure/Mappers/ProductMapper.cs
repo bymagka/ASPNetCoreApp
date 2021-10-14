@@ -36,6 +36,23 @@ namespace ASPNetCoreApp.Infostructure.Mappers
             };
         }
 
+
         public static IEnumerable<OrderViewModel> ToView(this IEnumerable<Order> orders) => orders.Select(ToView);
+
+        public static UserOrderViewModel ToUserView(this Order order)
+        {
+            return order is null ? null : new UserOrderViewModel
+            {
+                Address = order.Adress,
+                Phone = order.Phone,
+                Date = order.Date,
+                Id = order.Id,
+                Description = order.Description,
+                TotalPrice = order.Items.Sum(x => x.TotalPrice)
+        };
+    }
+
+
+        public static IEnumerable<UserOrderViewModel> ToUserView(this IEnumerable<Order> orders) => orders.Select(ToUserView);
     }
 }

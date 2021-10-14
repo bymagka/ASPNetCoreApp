@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ASPNetCoreApp.Services.Interfaces
 {
-    interface IOrderService
+    public interface IOrderService
     {
         Task<IEnumerable<Order>> GetUserOrders(string UserName);
 
