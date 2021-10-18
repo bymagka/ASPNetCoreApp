@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ASPNetCoreApp.Domain\ASPNetCoreApp.Domain.csproj" />
+    <ProjectReference Include="..\..\Common\ASPNetCoreApp.Domain\ASPNetCoreApp.Domain.csproj" />
   </ItemGroup>
 
 </Project>

@@ -17,13 +17,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ASPNetCoreApp.DAL\ASPNetCoreApp.DAL.csproj" />
-    <ProjectReference Include="..\ASPNetCoreApp.Domain\ASPNetCoreApp.Domain.csproj" />
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Models\" />
+    <ProjectReference Include="..\..\Common\ASPNetCoreApp.Domain\ASPNetCoreApp.Domain.csproj" />
+    <ProjectReference Include="..\..\Data\ASPNetCoreApp.DAL\ASPNetCoreApp.DAL.csproj" />
   </ItemGroup>
 
 </Project>
