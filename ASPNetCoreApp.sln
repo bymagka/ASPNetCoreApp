@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASPNetCoreApp.Services", "A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASPNetCoreApp.Interfaces", "Services\ASPNetCoreApp.Interfaces\ASPNetCoreApp.Interfaces.csproj", "{DF970E9F-1731-42FE-90EC-7D0A7D835C84}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASPNetCore.WebAPI", "Services\ASPNetCore.WebAPI\ASPNetCore.WebAPI.csproj", "{BD936DF9-1C8C-4C84-97C3-3C59AAD97DCF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{DF970E9F-1731-42FE-90EC-7D0A7D835C84}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF970E9F-1731-42FE-90EC-7D0A7D835C84}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF970E9F-1731-42FE-90EC-7D0A7D835C84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD936DF9-1C8C-4C84-97C3-3C59AAD97DCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD936DF9-1C8C-4C84-97C3-3C59AAD97DCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD936DF9-1C8C-4C84-97C3-3C59AAD97DCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD936DF9-1C8C-4C84-97C3-3C59AAD97DCF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,6 +63,7 @@ Global
 		{E60F9EBE-BB28-44B3-B58D-C022808AE4E6} = {3390E554-57B1-4C90-A7B9-F69524C48D7A}
 		{BC3A6B18-99B9-4740-BD32-5DC7B2C5AEA0} = {F392E52C-7700-4F0F-8565-7D29000ACAE6}
 		{DF970E9F-1731-42FE-90EC-7D0A7D835C84} = {F392E52C-7700-4F0F-8565-7D29000ACAE6}
+		{BD936DF9-1C8C-4C84-97C3-3C59AAD97DCF} = {F392E52C-7700-4F0F-8565-7D29000ACAE6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {490FE150-29E4-4810-8E88-036D3D68C2EC}
