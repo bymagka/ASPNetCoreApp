@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 
 
-namespace ASPNetCoreApp.ViewModels
+namespace ASPNetCoreApp.Domain.ViewModels
 {
     public class LoginViewModel
     {

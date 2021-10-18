@@ -1,5 +1,5 @@
 ﻿using ASPNetCoreApp.Services.Interfaces;
-using ASPNetCoreApp.ViewModels;
+using ASPNetCoreApp.Domain.ViewModels;
 using Microsoft.AspNetCore.Http;
 using ASPNetCoreApp.Domain.Entities;
 using Newtonsoft.Json;

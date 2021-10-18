@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ASPNetCoreApp.Domain.Entities;
-using ASPNetCoreApp.ViewModels;
+using ASPNetCoreApp.Domain.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace ASPNetCoreApp.Services.InSQL

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ASPNetCoreApp.Domain;
 using ASPNetCoreApp.Services.Interfaces;
-using ASPNetCoreApp.ViewModels;
+using ASPNetCoreApp.Domain.ViewModels;
 using ASPNetCoreApp.Infostructure.Mappers;
 
 namespace ASPNetCoreApp.Controllers

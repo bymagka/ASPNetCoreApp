@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using ASPNetCoreApp.Data;
 using ASPNetCoreApp.Services.Interfaces;
 using Microsoft.Extensions.Logging;
-using ASPNetCoreApp.ViewModels;
+using ASPNetCoreApp.Domain.ViewModels;
 using ASPNetCoreApp.Domain.Entities;
 
 namespace ASPNetCoreApp.Controllers

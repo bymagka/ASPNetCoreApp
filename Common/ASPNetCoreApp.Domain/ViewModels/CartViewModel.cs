@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 
-namespace ASPNetCoreApp.ViewModels
+namespace ASPNetCoreApp.Domain.ViewModels
 {
     public class CartViewModel
     {

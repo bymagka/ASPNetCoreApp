@@ -1,6 +1,6 @@
 ﻿
 
-using ASPNetCoreApp.ViewModels;
+using ASPNetCoreApp.Domain.ViewModels;
 
 namespace ASPNetCoreApp.Services.Interfaces
 {

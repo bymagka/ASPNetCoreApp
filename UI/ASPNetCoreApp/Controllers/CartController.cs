@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ASPNetCoreApp.Services.InCookies;
 using ASPNetCoreApp.Services.Interfaces;
-using ASPNetCoreApp.ViewModels;
+using ASPNetCoreApp.Domain.ViewModels;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 

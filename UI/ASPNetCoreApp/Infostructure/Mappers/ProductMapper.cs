@@ -1,5 +1,5 @@
 ﻿
-using ASPNetCoreApp.ViewModels;
+using ASPNetCoreApp.Domain.ViewModels;
 using ASPNetCoreApp.Domain.Entities;
 using System.Collections.Generic;
 using System.Linq;

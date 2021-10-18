@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ASPNetCoreApp.Services.Interfaces;
 using System.Collections.Generic;
-using ASPNetCoreApp.ViewModels;
+using ASPNetCoreApp.Domain.ViewModels;
 using System.Linq;
 
 namespace ASPNetCoreApp.Components

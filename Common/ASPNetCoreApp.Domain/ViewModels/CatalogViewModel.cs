@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 
-namespace ASPNetCoreApp.ViewModels
+namespace ASPNetCoreApp.Domain.ViewModels
 {
     public class CatalogViewModel
     {
