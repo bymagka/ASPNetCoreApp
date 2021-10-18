@@ -28,6 +28,7 @@
     <ProjectReference Include="..\..\Common\ASPNetCoreApp.Domain\ASPNetCoreApp.Domain.csproj" />
     <ProjectReference Include="..\..\Data\ASPNetCoreApp.DAL\ASPNetCoreApp.DAL.csproj" />
     <ProjectReference Include="..\..\Services\ASPNetCoreApp.Interfaces\ASPNetCoreApp.Interfaces.csproj" />
+    <ProjectReference Include="..\..\Services\ASPNetCoreApp.WebAPI.Clients\ASPNetCoreApp.WebAPI.Clients.csproj" />
   </ItemGroup>
 
 </Project>
