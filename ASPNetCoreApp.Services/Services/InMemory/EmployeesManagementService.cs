@@ -1,11 +1,11 @@
-﻿using ASPNetCoreApp.Services.Interfaces;
+﻿using ASPNetCoreApp.Interfaces.Services;
 using ASPNetCoreApp.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using ASPNetCoreApp.Data;
+using ASPNetCoreApp.Services.Data;
 
 namespace ASPNetCoreApp.Services
 {

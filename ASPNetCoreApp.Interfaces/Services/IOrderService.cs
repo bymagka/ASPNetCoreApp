@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ASPNetCoreApp.Services.Interfaces
+namespace ASPNetCoreApp.Interfaces.Services
 {
     public interface IOrderService
     {

@@ -1,7 +1,7 @@
 ﻿using ASPNetCoreApp.Domain.Entities;
-using ASPNetCoreApp.Services.Interfaces;
+using ASPNetCoreApp.Interfaces.Services;
 using System.Collections.Generic;
-using ASPNetCoreApp.Data;
+using ASPNetCoreApp.Services.Data;
 using ASPNetCoreApp.Domain;
 using System.Linq;
 

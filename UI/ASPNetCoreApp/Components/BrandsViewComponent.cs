@@ -1,5 +1,5 @@
 ﻿using ASPNetCoreApp.Domain.ViewModels;
-using ASPNetCoreApp.Services.Interfaces;
+using ASPNetCoreApp.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using ASPNetCoreApp.Domain.Entities;
 
 
-namespace ASPNetCoreApp.Data
+namespace ASPNetCoreApp.Services.Data
 {
     public static class TestData
     {

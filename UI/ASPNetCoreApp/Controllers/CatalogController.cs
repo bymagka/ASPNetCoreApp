@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ASPNetCoreApp.Domain;
-using ASPNetCoreApp.Services.Interfaces;
+using ASPNetCoreApp.Interfaces.Services;
 using ASPNetCoreApp.Domain.ViewModels;
-using ASPNetCoreApp.Infostructure.Mappers;
+using ASPNetCoreApp.Services.Mappers;
 
 namespace ASPNetCoreApp.Controllers
 {

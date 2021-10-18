@@ -1,6 +1,6 @@
 ﻿using ASPNetCoreApp.Domain.Identity;
-using ASPNetCoreApp.Infostructure.Mappers;
-using ASPNetCoreApp.Services.Interfaces;
+using ASPNetCoreApp.Services.Mappers;
+using ASPNetCoreApp.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;

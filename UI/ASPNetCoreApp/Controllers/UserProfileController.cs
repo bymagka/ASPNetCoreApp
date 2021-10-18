@@ -1,11 +1,11 @@
-﻿using ASPNetCoreApp.Services.Interfaces;
+﻿using ASPNetCoreApp.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ASPNetCoreApp.Infostructure.Mappers;
+using ASPNetCoreApp.Services.Mappers;
 
 namespace ASPNetCoreApp.Controllers
 {

@@ -1,5 +1,5 @@
 ﻿using ASPNetCoreApp.Domain.Identity;
-using ASPNetCoreApp.Services.Interfaces;
+using ASPNetCoreApp.Interfaces.Services;
 using Microsoft.AspNetCore.Identity;
 using ASPNetCoreApp.DAL.Context;
 using System;

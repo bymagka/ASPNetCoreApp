@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using ASPNetCoreApp.Domain;
 
-namespace ASPNetCoreApp.Services.Interfaces
+namespace ASPNetCoreApp.Interfaces.Services
 {
     public interface IProductData
     {

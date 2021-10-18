@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using ASPNetCoreApp.Domain.Identity;
 
-namespace ASPNetCoreApp.Data
+namespace ASPNetCoreApp.Services.Data
 {
     public class DbInitializer
     {

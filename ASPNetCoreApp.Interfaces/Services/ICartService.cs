@@ -2,7 +2,7 @@
 
 using ASPNetCoreApp.Domain.ViewModels;
 
-namespace ASPNetCoreApp.Services.Interfaces
+namespace ASPNetCoreApp.Interfaces.Services
 {
     public interface ICartService
     {

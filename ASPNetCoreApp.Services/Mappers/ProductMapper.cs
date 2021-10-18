@@ -4,7 +4,7 @@ using ASPNetCoreApp.Domain.Entities;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ASPNetCoreApp.Infostructure.Mappers
+namespace ASPNetCoreApp.Services.Mappers
 {
     public static class ProductMapper
     {

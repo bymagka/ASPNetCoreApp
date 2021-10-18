@@ -1,11 +1,11 @@
-﻿using ASPNetCoreApp.Services.Interfaces;
+﻿using ASPNetCoreApp.Interfaces.Services;
 using ASPNetCoreApp.Domain.ViewModels;
 using Microsoft.AspNetCore.Http;
 using ASPNetCoreApp.Domain.Entities;
 using Newtonsoft.Json;
 using System.Linq;
 using ASPNetCoreApp.Domain;
-using ASPNetCoreApp.Infostructure.Mappers;
+using ASPNetCoreApp.Services.Mappers;
 
 namespace ASPNetCoreApp.Services.InCookies
 {
