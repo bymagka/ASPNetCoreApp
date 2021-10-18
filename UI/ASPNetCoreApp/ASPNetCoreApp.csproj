@@ -20,13 +20,14 @@
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Infostructure\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ASPNetCoreApp.Interfaces\ASPNetCoreApp.Interfaces.csproj" />
-    <ProjectReference Include="..\..\ASPNetCoreApp.Services\ASPNetCoreApp.Services.csproj" />
     <ProjectReference Include="..\..\Common\ASPNetCoreApp.Domain\ASPNetCoreApp.Domain.csproj" />
     <ProjectReference Include="..\..\Data\ASPNetCoreApp.DAL\ASPNetCoreApp.DAL.csproj" />
+    <ProjectReference Include="..\..\Services\ASPNetCoreApp.Interfaces\ASPNetCoreApp.Interfaces.csproj" />
+    <ProjectReference Include="..\..\Services\ASPNetCoreApp.Services\ASPNetCoreApp.Services.csproj" />
   </ItemGroup>
 
 </Project>
