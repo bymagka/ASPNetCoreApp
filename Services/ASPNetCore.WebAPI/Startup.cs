@@ -1,6 +1,11 @@
 using ASPNetCoreApp.DAL.Context;
+using ASPNetCoreApp.Domain.Identity;
+using ASPNetCoreApp.Interfaces.Services;
+using ASPNetCoreApp.Services.InCookies;
+using ASPNetCoreApp.Services.InSQL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -23,6 +28,34 @@ namespace ASPNetCore.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ASPNetCoreAPPDb>(opt => opt.UseSqlServer(configuration.GetConnectionString("TininBase")));
+
+            services.AddIdentity<User, Role>()
+                   .AddEntityFrameworkStores<ASPNetCoreAPPDb>()
+                   .AddDefaultTokenProviders();
+
+            services.Configure<IdentityOptions>(op =>
+            {
+#if DEBUG
+                op.Password.RequireDigit = false;
+                op.Password.RequireLowercase = false;
+                op.Password.RequireUppercase = false;
+                op.Password.RequireNonAlphanumeric = false;
+                op.Password.RequiredLength = 3;
+                op.Password.RequiredUniqueChars = 3;
+#endif
+                op.User.RequireUniqueEmail = false;
+
+
+                op.Lockout.AllowedForNewUsers = false;
+                op.Lockout.MaxFailedAccessAttempts = 10;
+                op.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
+            });
+
+            services.AddScoped<IEmployeeService, SQLEmployyesManagementService>();
+            services.AddScoped<IProductData, SQLProductDataService>();
+            services.AddScoped<ICartService, InCookiesCartService>();
+            services.AddScoped<IOrderService, SQLOrderService>();
+
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

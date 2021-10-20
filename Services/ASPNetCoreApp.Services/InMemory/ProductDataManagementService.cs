@@ -5,7 +5,7 @@ using ASPNetCoreApp.Services.Data;
 using ASPNetCoreApp.Domain;
 using System.Linq;
 
-namespace ASPNetCoreApp.Services
+namespace ASPNetCoreApp.Services.InMemory
 {
     public class ProductDataManagementService : IProductData
     {

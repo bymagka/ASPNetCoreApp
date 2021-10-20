@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using ASPNetCoreApp.Services.Data;
 
-namespace ASPNetCoreApp.Services
+namespace ASPNetCoreApp.Services.InMemory
 {
     public class EmployeesManagementService : IEmployeeService
     {
