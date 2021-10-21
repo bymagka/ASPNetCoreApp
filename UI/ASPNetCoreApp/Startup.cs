@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Identity;
 using System;
 using ASPNetCoreApp.Interfaces.TestApi;
 using ASPNetCoreApp.WebAPI.Clients.Values;
+using ASPNetCoreApp.WebAPI.Clients.Employees;
 
 namespace ASPNetCoreApp
 {
@@ -67,7 +68,9 @@ namespace ASPNetCoreApp
             services.AddScoped<ICartService, InCookiesCartService>();
             services.AddScoped<IOrderService, SQLOrderService>();
 
-            services.AddHttpClient<IValuesService, ValuesClient>(client => client.BaseAddress = new(Configuration["WebAPI"]));
+            services.AddHttpClient("ASPNetCoreWebAPI",client => client.BaseAddress = new(Configuration["WebAPI"]))
+                .AddTypedClient<IValuesService,ValuesClient>()
+                .AddTypedClient<IEmployeeService, EmployyesClient>();
 
             services.AddControllersWithViews()
                     .AddRazorRuntimeCompilation();
