@@ -65,12 +65,13 @@ namespace ASPNetCoreApp
             //services.AddScoped<IEmployeeService, SQLEmployyesManagementService>();
             //services.AddScoped<IProductData, SQLProductDataService>();
             services.AddScoped<ICartService, InCookiesCartService>();
-            services.AddScoped<IOrderService, SQLOrderService>();
+            //services.AddScoped<IOrderService, SQLOrderService>();
 
             services.AddHttpClient("ASPNetCoreWebAPI", client => client.BaseAddress = new(Configuration["WebAPI"]))
                 .AddTypedClient<IValuesService, ValuesClient>()
                 .AddTypedClient<IEmployeeService, EmployyesClient>()
-                .AddTypedClient<IProductData, ProductsClient>();
+                .AddTypedClient<IProductData, ProductsClient>()
+                .AddTypedClient<IOrderService, OrdersClient>();
 
             services.AddControllersWithViews()
                     .AddRazorRuntimeCompilation();

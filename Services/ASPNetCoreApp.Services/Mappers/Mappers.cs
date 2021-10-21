@@ -227,4 +227,17 @@ namespace ASPNetCoreApp.Services.Mappers
             };
         }
     }
+
+    public static class CartViewModelMapper
+    {
+        public static IEnumerable<OrderItemDTO> ToDTO(this CartViewModel cartViewModel)
+        {
+            return cartViewModel.ItemsList.Select(x => new OrderItemDTO 
+            { 
+                Price = x.product.Price,
+                ProductId = x.product.Id,
+                Quantity = x.Quantity,
+            });
+        }
+    }
 }
