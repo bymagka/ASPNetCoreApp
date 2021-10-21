@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ASPNetCoreApp.WebAPI.Clients.Base;
+﻿using System.Collections.Generic;
 using ASPNetCoreApp.Interfaces.Services;
 using ASPNetCoreApp.Domain.Entities;
 using System.Net.Http;
 using System.Net.Http.Json;
 
-namespace ASPNetCoreApp.WebAPI.Clients.Employees
+namespace ASPNetCoreApp.WebAPI.Clients
 {
     public class EmployyesClient : BaseClient, IEmployeeService
     {

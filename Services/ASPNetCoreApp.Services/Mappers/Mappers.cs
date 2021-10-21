@@ -18,7 +18,7 @@ namespace ASPNetCoreApp.Services.Mappers
                 Price = prod.Price,
                 Brand = prod.Brand?.Name,
                 Section = prod.Section?.Name,
-
+                
             };
 
         public static IEnumerable<ProductViewModel> ToView(this IEnumerable<Product> products) => products.Select(ToView);
@@ -35,6 +35,7 @@ namespace ASPNetCoreApp.Services.Mappers
                 Price = product.Price,
                 Brand = product.Brand.ToDTO(),
                 Section = product.Section?.ToDTO(),
+                ImageURL = product.ImageUrl,
             };
         }
 
@@ -50,6 +51,7 @@ namespace ASPNetCoreApp.Services.Mappers
                 Brand = product.Brand.FromDTO(),
                 SectionId = product.Section?.Id,
                 Section = product.Section.FromDTO(),
+                ImageUrl = product.ImageURL,
             };
         }
 

@@ -13,8 +13,7 @@ using ASPNetCoreApp.Domain.Identity;
 using Microsoft.AspNetCore.Identity;
 using System;
 using ASPNetCoreApp.Interfaces.TestApi;
-using ASPNetCoreApp.WebAPI.Clients.Values;
-using ASPNetCoreApp.WebAPI.Clients.Employees;
+using ASPNetCoreApp.WebAPI.Clients;
 
 namespace ASPNetCoreApp
 {
@@ -63,14 +62,15 @@ namespace ASPNetCoreApp
 
             //services.AddSingleton<IEmployeeService, EmployeesManagementService>();
             //services.AddSingleton<IProductData, ProductDataManagementService>();
-            services.AddScoped<IEmployeeService, SQLEmployyesManagementService>();
-            services.AddScoped<IProductData, SQLProductDataService>();
+            //services.AddScoped<IEmployeeService, SQLEmployyesManagementService>();
+            //services.AddScoped<IProductData, SQLProductDataService>();
             services.AddScoped<ICartService, InCookiesCartService>();
             services.AddScoped<IOrderService, SQLOrderService>();
 
-            services.AddHttpClient("ASPNetCoreWebAPI",client => client.BaseAddress = new(Configuration["WebAPI"]))
-                .AddTypedClient<IValuesService,ValuesClient>()
-                .AddTypedClient<IEmployeeService, EmployyesClient>();
+            services.AddHttpClient("ASPNetCoreWebAPI", client => client.BaseAddress = new(Configuration["WebAPI"]))
+                .AddTypedClient<IValuesService, ValuesClient>()
+                .AddTypedClient<IEmployeeService, EmployyesClient>()
+                .AddTypedClient<IProductData, ProductsClient>();
 
             services.AddControllersWithViews()
                     .AddRazorRuntimeCompilation();

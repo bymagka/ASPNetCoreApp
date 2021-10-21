@@ -60,7 +60,7 @@ namespace ASPNetCore.WebAPI.Controllers
             return Ok(products.ToDTO());
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public IActionResult GetProduct(int id)
         {
             var product = productData.GetProductById(id);

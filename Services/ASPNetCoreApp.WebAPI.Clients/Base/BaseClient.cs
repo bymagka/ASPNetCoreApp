@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http.Json;
 
-namespace ASPNetCoreApp.WebAPI.Clients.Base
+namespace ASPNetCoreApp.WebAPI.Clients
 {
     public abstract class BaseClient
     {

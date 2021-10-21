@@ -12,6 +12,7 @@ namespace ASPNetCoreApp.Domain.DTO
 
         public decimal Price { get; set; }
 
+        public string ImageURL { get; set; }
 
         public BrandDTO Brand { get; set; }
 

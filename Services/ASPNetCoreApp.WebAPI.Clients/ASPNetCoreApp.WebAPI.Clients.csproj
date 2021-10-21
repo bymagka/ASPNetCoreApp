@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ASPNetCoreApp.Interfaces\ASPNetCoreApp.Interfaces.csproj" />
+    <ProjectReference Include="..\ASPNetCoreApp.Services\ASPNetCoreApp.Services.csproj" />
   </ItemGroup>
 
 </Project>

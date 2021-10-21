@@ -1,11 +1,10 @@
 ﻿using ASPNetCoreApp.Interfaces.TestApi;
-using ASPNetCoreApp.WebAPI.Clients.Base;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
 
-namespace ASPNetCoreApp.WebAPI.Clients.Values
+namespace ASPNetCoreApp.WebAPI.Clients
 {
     public class ValuesClient : BaseClient,IValuesService
     {
