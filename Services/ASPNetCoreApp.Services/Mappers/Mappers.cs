@@ -120,7 +120,6 @@ namespace ASPNetCoreApp.Services.Mappers
         public static IEnumerable<Section> FromDTO(this IEnumerable<SectionDTO> sections) => sections.Select(FromDTO);
     }
 
-    
     public static class OrderMapper
     {
         public static OrderViewModel ToView(this Order order)
@@ -151,5 +150,81 @@ namespace ASPNetCoreApp.Services.Mappers
 
 
         public static IEnumerable<UserOrderViewModel> ToUserView(this IEnumerable<Order> orders) => orders.Select(ToUserView);
+
+
+        #region DTO
+        public static OrderDTO ToDTO(this Order order)
+        {
+            return order is null ? null : new OrderDTO
+            {
+                Id = order.Id,
+                Adress = order.Adress,
+                Date = order.Date,
+                Description = order.Description,
+                Phone = order.Phone,
+                Items = order.Items.ToDTO(),
+                
+            };
+        }
+
+        public static Order FromDTO(this OrderDTO order)
+        {
+            return order is null ? null : new Order
+            {
+                Id = order.Id,
+                Adress = order.Adress,
+                Date = order.Date,
+                Description = order.Description,
+                Phone = order.Phone,
+                Items = order.Items.FromDTO().ToList(),
+
+            };
+        }
+
+        public static IEnumerable<OrderDTO> ToDTO(this IEnumerable<Order> orders) => orders.Select(ToDTO);
+
+        public static IEnumerable<Order> FromDTO(this IEnumerable<OrderDTO> orders) => orders.Select(FromDTO);
+        #endregion
+    }
+
+    public static class OrderItemMapper
+    {
+        public static OrderItemDTO ToDTO(this OrderItem orderItem)
+        {
+            return orderItem is null ? null : new OrderItemDTO
+            {
+                Id = orderItem.Id,
+                Price = orderItem.Price,
+                ProductId = orderItem.Product.Id,
+                Quantity = orderItem.Quantity,
+            };
+        }
+
+        public static OrderItem FromDTO(this OrderItemDTO orderItem)
+        {
+            return orderItem is null ? null : new OrderItem
+            {
+                Id = orderItem.Id,
+                Price = orderItem.Price,
+                Product = new() {Id = orderItem.ProductId},
+                Quantity = orderItem.Quantity,
+            };
+        }
+
+        public static IEnumerable<OrderItemDTO> ToDTO(this IEnumerable<OrderItem> orders) => orders.Select(ToDTO);
+
+        public static IEnumerable<OrderItem> FromDTO(this IEnumerable<OrderItemDTO> orders) => orders.Select(FromDTO);
+
+        public static CartViewModel ToCartView(this IEnumerable<OrderItemDTO> orders)
+        {
+            return new CartViewModel
+            {
+                ItemsList = orders.Select(x => (new ProductViewModel
+                {
+                    Id = x.Id,
+                },
+                x.Quantity))
+            };
+        }
     }
 }
