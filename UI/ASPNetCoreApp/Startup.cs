@@ -17,10 +17,8 @@ using ASPNetCoreApp.WebAPI.Clients;
 
 namespace ASPNetCoreApp
 {
-    public class Startup
+    public record Startup(IConfiguration Configuration)
     {
-        public IConfiguration Configuration { get; set; }
-
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ASPNetCoreAPPDb>(opt => opt.UseSqlServer(Configuration.GetConnectionString("TininBase")));
@@ -77,12 +75,6 @@ namespace ASPNetCoreApp
                     .AddRazorRuntimeCompilation();
         }
 
-
-
-        public Startup(IConfiguration configuration)
-        {
-            this.Configuration = configuration;
-        }
 
       
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
