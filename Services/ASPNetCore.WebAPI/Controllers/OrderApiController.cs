@@ -7,12 +7,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ASPNetCoreApp.Services.Infostructure;
 
 namespace ASPNetCore.WebAPI.Controllers
 {
     
     [ApiController]
-    [Route("api/orders")]
+    [Route(WebApiAdresses.Orders)]
     public class OrderApiController : ControllerBase
     {
         private readonly IOrderService orderService;

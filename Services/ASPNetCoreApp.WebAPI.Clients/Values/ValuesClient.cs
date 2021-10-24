@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
+using ASPNetCoreApp.Services.Infostructure;
 
 namespace ASPNetCoreApp.WebAPI.Clients
 {
     public class ValuesClient : BaseClient,IValuesService
     {
-        public ValuesClient(HttpClient Client) : base(Client,"api/values")
+        public ValuesClient(HttpClient Client) : base(Client,WebApiAdresses.Values)
         {
             
         }

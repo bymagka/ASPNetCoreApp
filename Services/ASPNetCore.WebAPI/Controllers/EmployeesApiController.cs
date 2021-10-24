@@ -5,11 +5,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using ASPNetCoreApp.Interfaces.Services;
 using ASPNetCoreApp.Domain.Entities;
+using ASPNetCoreApp.Services.Infostructure;
 
 namespace ASPNetCoreApp.Controllers
 {
     [ApiController]
-    [Route("api/employyes")]
+    [Route(WebApiAdresses.Employees)]
     public class EmployeesApiController : ControllerBase
     {
         private readonly IEmployeeService employeeService;

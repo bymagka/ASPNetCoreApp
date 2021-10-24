@@ -10,12 +10,13 @@ using System.Net.Http.Json;
 using ASPNetCoreApp.Domain.Entities;
 using ASPNetCoreApp.Services.Mappers;
 using ASPNetCoreApp.Domain.ViewModels;
+using ASPNetCoreApp.Services.Infostructure;
 
 namespace ASPNetCoreApp.WebAPI.Clients
 {
     public class OrdersClient : BaseClient,IOrderService
     {
-        public OrdersClient(HttpClient client) : base(client,"api/orders")
+        public OrdersClient(HttpClient client) : base(client,WebApiAdresses.Orders)
         {
 
         }

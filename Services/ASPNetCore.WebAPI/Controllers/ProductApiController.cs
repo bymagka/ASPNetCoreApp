@@ -4,13 +4,14 @@ using ASPNetCoreApp.Interfaces.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ASPNetCoreApp.Services.Mappers;
+using ASPNetCoreApp.Services.Infostructure;
 
 
 namespace ASPNetCore.WebAPI.Controllers
 {
 
     [ApiController]
-    [Route("api/products")]
+    [Route(WebApiAdresses.Products)]
     public class ProductApiController : ControllerBase
     {
         private readonly IProductData productData;

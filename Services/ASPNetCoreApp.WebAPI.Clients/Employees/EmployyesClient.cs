@@ -3,13 +3,14 @@ using ASPNetCoreApp.Interfaces.Services;
 using ASPNetCoreApp.Domain.Entities;
 using System.Net.Http;
 using System.Net.Http.Json;
+using ASPNetCoreApp.Services.Infostructure;
 
 namespace ASPNetCoreApp.WebAPI.Clients
 {
     public class EmployyesClient : BaseClient, IEmployeeService
     {
 
-        public EmployyesClient(HttpClient Client) : base(Client, "api/employyes")
+        public EmployyesClient(HttpClient Client) : base(Client, WebApiAdresses.Employees)
         {
             
         }

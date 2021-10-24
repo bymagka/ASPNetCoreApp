@@ -4,10 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ASPNetCoreApp.Services.Infostructure;
 
 namespace ASPNetCore.WebAPI
 {
-    [Route("api/[controller]")]
+    [Route(WebApiAdresses.Values)]
     [ApiController]
     public class ValuesController : ControllerBase
     {

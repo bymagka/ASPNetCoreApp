@@ -10,13 +10,14 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
+using ASPNetCoreApp.Services.Infostructure;
 
 namespace ASPNetCoreApp.WebAPI.Clients
 {
     public class ProductsClient : BaseClient, IProductData
     {
 
-        public ProductsClient(HttpClient httpClient) : base(httpClient,"api/products")
+        public ProductsClient(HttpClient httpClient) : base(httpClient,WebApiAdresses.Products)
         {
 
         }

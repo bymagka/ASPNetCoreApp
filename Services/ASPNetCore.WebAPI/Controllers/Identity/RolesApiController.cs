@@ -4,10 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ASPNetCoreApp.Services.Infostructure;
 
 namespace ASPNetCore.WebAPI.Controllers.Identity
 {
-    [Route("api/[controller]")]
+    [Route(WebApiAdresses.Identity.Roles)]
     [ApiController]
     public class RolesApiController : ControllerBase
     {
