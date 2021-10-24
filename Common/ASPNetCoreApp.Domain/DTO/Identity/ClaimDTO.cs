@@ -18,7 +18,7 @@ namespace ASPNetCoreApp.Domain.DTO.Identity
 
     }
 
-    public class ReplaceClaimDTO
+    public class ReplaceClaimDTO : UserDTO
     {
         public Claim Claim { get; set; }
         public Claim NewClaim { get; set; }
