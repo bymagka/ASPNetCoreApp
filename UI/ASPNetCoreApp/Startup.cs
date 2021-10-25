@@ -15,6 +15,7 @@ using System;
 using ASPNetCoreApp.Interfaces.TestApi;
 using ASPNetCoreApp.WebAPI.Clients;
 using ASPNetCoreApp.WebAPI.Clients.Identity;
+using ASPNetCoreApp.Services.Infostructure;
 
 namespace ASPNetCoreApp
 {
@@ -26,7 +27,7 @@ namespace ASPNetCoreApp
 
 
             services.AddIdentity<User, Role>()
-                    //.AddEntityFrameworkStores<ASPNetCoreAPPDb>()
+                    .AddIdentityAppWebApiClients()
                     .AddDefaultTokenProviders();
 
             services.Configure<IdentityOptions>(op =>
@@ -62,19 +63,7 @@ namespace ASPNetCoreApp
             services.AddScoped<ICartService, InCookiesCartService>();
         
 
-            services.AddHttpClient("ASPNetCoreWebAPI", client => client.BaseAddress = new(Configuration["WebAPI"]))
-                .AddTypedClient<IValuesService, ValuesClient>()
-                .AddTypedClient<IEmployeeService, EmployyesClient>()
-                .AddTypedClient<IProductData, ProductsClient>()
-                .AddTypedClient<IOrderService, OrdersClient>()
-                .AddTypedClient<IUserStore<User>, UsersClient>()
-                .AddTypedClient<IUserRoleStore<User>, UsersClient>()
-                .AddTypedClient<IUserPasswordStore<User>, UsersClient>()
-                .AddTypedClient<IUserClaimStore<User>, UsersClient>()
-                .AddTypedClient<IUserPhoneNumberStore<User>, UsersClient>()
-                .AddTypedClient<IUserLoginStore<User>, UsersClient>()
-                .AddTypedClient<IUserTwoFactorStore<User>, UsersClient>()
-                .AddTypedClient<IRoleStore<Role>, RolesClient>();
+            
 
             services.AddControllersWithViews()
                     .AddRazorRuntimeCompilation();
