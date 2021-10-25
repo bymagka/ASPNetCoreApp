@@ -18,11 +18,11 @@ namespace ASPNetCore.WebAPI
 
            var host = CreateHostBuilder(args).Build();
 
-            //using (var scope = host.Services.CreateScope())
-            //{
-            //    var initializer = scope.ServiceProvider.GetRequiredService<DbInitializer>();
-            //    await initializer.InitializeAsync();
-            //}
+            using (var scope = host.Services.CreateScope())
+            {
+                var initializer = scope.ServiceProvider.GetRequiredService<DbInitializer>();
+                await initializer.InitializeAsync();
+            }
 
             await host.RunAsync();
         }
