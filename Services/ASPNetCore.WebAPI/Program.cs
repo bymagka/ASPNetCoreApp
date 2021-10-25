@@ -1,5 +1,7 @@
+using ASPNetCoreApp.Services.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
@@ -15,6 +17,12 @@ namespace ASPNetCore.WebAPI
         {
 
            var host = CreateHostBuilder(args).Build();
+
+            //using (var scope = host.Services.CreateScope())
+            //{
+            //    var initializer = scope.ServiceProvider.GetRequiredService<DbInitializer>();
+            //    await initializer.InitializeAsync();
+            //}
 
             await host.RunAsync();
         }

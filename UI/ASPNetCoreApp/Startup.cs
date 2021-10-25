@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Identity;
 using System;
 using ASPNetCoreApp.Interfaces.TestApi;
 using ASPNetCoreApp.WebAPI.Clients;
+using ASPNetCoreApp.WebAPI.Clients.Identity;
 
 namespace ASPNetCoreApp
 {
@@ -21,12 +22,11 @@ namespace ASPNetCoreApp
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ASPNetCoreAPPDb>(opt => opt.UseSqlServer(Configuration.GetConnectionString("TininBase")));
-            services.AddTransient<DbInitializer>();
+
 
 
             services.AddIdentity<User, Role>()
-                    .AddEntityFrameworkStores<ASPNetCoreAPPDb>()
+                    //.AddEntityFrameworkStores<ASPNetCoreAPPDb>()
                     .AddDefaultTokenProviders();
 
             services.Configure<IdentityOptions>(op =>
@@ -58,18 +58,23 @@ namespace ASPNetCoreApp
                 ck.SlidingExpiration = true;
             });
 
-            //services.AddSingleton<IEmployeeService, EmployeesManagementService>();
-            //services.AddSingleton<IProductData, ProductDataManagementService>();
-            //services.AddScoped<IEmployeeService, SQLEmployyesManagementService>();
-            //services.AddScoped<IProductData, SQLProductDataService>();
+
             services.AddScoped<ICartService, InCookiesCartService>();
-            //services.AddScoped<IOrderService, SQLOrderService>();
+        
 
             services.AddHttpClient("ASPNetCoreWebAPI", client => client.BaseAddress = new(Configuration["WebAPI"]))
                 .AddTypedClient<IValuesService, ValuesClient>()
                 .AddTypedClient<IEmployeeService, EmployyesClient>()
                 .AddTypedClient<IProductData, ProductsClient>()
-                .AddTypedClient<IOrderService, OrdersClient>();
+                .AddTypedClient<IOrderService, OrdersClient>()
+                .AddTypedClient<IUserStore<User>, UsersClient>()
+                .AddTypedClient<IUserRoleStore<User>, UsersClient>()
+                .AddTypedClient<IUserPasswordStore<User>, UsersClient>()
+                .AddTypedClient<IUserClaimStore<User>, UsersClient>()
+                .AddTypedClient<IUserPhoneNumberStore<User>, UsersClient>()
+                .AddTypedClient<IUserLoginStore<User>, UsersClient>()
+                .AddTypedClient<IUserTwoFactorStore<User>, UsersClient>()
+                .AddTypedClient<IRoleStore<Role>, RolesClient>();
 
             services.AddControllersWithViews()
                     .AddRazorRuntimeCompilation();

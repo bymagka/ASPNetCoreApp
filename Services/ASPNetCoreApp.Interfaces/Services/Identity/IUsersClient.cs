@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Identity;
 namespace ASPNetCoreApp.Interfaces.Services.Identity
 {
     public interface IUsersClient : 
-        IUserStore<User>,
+        IUserRoleStore<User>,
         IUserPasswordStore<User>,
         IUserEmailStore<User>,
         IUserClaimStore<User>,

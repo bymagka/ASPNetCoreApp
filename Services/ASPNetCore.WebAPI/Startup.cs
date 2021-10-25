@@ -1,6 +1,7 @@
 using ASPNetCoreApp.DAL.Context;
 using ASPNetCoreApp.Domain.Identity;
 using ASPNetCoreApp.Interfaces.Services;
+using ASPNetCoreApp.Services.Data;
 using ASPNetCoreApp.Services.InCookies;
 using ASPNetCoreApp.Services.InSQL;
 using Microsoft.AspNetCore.Builder;
@@ -28,6 +29,10 @@ namespace ASPNetCore.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ASPNetCoreAPPDb>(opt => opt.UseSqlServer(configuration.GetConnectionString("TininBase")));
+
+            services.AddScoped<DbInitializer>();
+
+            
 
             services.AddIdentity<User, Role>()
                    .AddEntityFrameworkStores<ASPNetCoreAPPDb>()

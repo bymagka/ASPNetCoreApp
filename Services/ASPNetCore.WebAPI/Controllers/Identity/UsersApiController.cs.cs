@@ -19,10 +19,10 @@ namespace ASPNetCore.WebAPI.Controllers.Identity
     [ApiController]
     public class UsersApiController : ControllerBase
     {
-        private readonly UserStore<User> _UserStore;
+        private readonly UserStore<User,Role, ASPNetCoreAPPDb> _UserStore;
         public UsersApiController(ASPNetCoreAPPDb dbContext)
         {
-            _UserStore = new UserStore<User>(dbContext);
+            _UserStore = new UserStore<User,Role, ASPNetCoreAPPDb>(dbContext);
         }
 
 

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http.Json;
 using System.Threading;
+using System.Net;
 
 namespace ASPNetCoreApp.WebAPI.Clients
 {
@@ -30,6 +31,9 @@ namespace ASPNetCoreApp.WebAPI.Clients
         protected async Task<T> GetAsync<T>(string url, CancellationToken token = default)
         {
             var response = await Client.GetAsync(url,token).ConfigureAwait(false);
+
+            if (response.StatusCode == HttpStatusCode.NoContent) return default;
+
             return await response
                 .EnsureSuccessStatusCode()
                 .Content
