@@ -368,3 +368,7 @@ FodyWeavers.xsd
 /ASPNetCoreApp/wwwroot/js/site.js
 /ASPNetCoreApp/wwwroot/css/site.min.css
 /ASPNetCoreApp/wwwroot/css/site.css
+/UI/ASPNetCoreApp/ASPNetCoreApp.xml
+/Services/ASPNetCore.WebAPI/ASPNetCore.WebAPI.xml
+/Common/ASPNetCoreApp.Domain/ASPNetCoreApp.Domain.xml
+/.editorconfig

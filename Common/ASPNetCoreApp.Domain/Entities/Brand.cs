@@ -3,8 +3,14 @@ using ASPNetCoreApp.Domain.Entities.Base;
 
 namespace ASPNetCoreApp.Domain.Entities
 {
+    /// <summary>
+    /// Бренд
+    /// </summary>
     public class Brand : NamedEntity, IOrderedEntity
     {
+        /// <summary>
+        /// Заказ
+        /// </summary>
         public int Order { get; set; }
     }
 }

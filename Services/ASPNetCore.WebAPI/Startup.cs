@@ -16,6 +16,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -66,6 +67,23 @@ namespace ASPNetCore.WebAPI
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ASPNetCore.WebAPI", Version = "v1" });
+
+
+                const string AspNetApp_webApi_xml = "ASPNetCore.WebAPI.xml";
+                const string AspNetApp_domain_xml = "ASPNetCoreApp.Domain.xml";
+                const string AspNetApp_xml = "ASPNetCoreApp.xml";
+                const string debug_path = "bin/debug/net5.0";
+
+                if (File.Exists(AspNetApp_xml)) c.IncludeXmlComments(AspNetApp_xml);
+                else if(File.Exists(Path.Combine(debug_path,AspNetApp_xml))) c.IncludeXmlComments(Path.Combine(debug_path, AspNetApp_xml));
+
+                if (File.Exists(AspNetApp_domain_xml)) c.IncludeXmlComments(AspNetApp_domain_xml);
+                else if (File.Exists(Path.Combine(debug_path, AspNetApp_domain_xml))) c.IncludeXmlComments(Path.Combine(debug_path, AspNetApp_domain_xml));
+
+                if (File.Exists(AspNetApp_webApi_xml)) c.IncludeXmlComments(AspNetApp_webApi_xml);
+                else if (File.Exists(Path.Combine(debug_path, AspNetApp_webApi_xml))) c.IncludeXmlComments(Path.Combine(debug_path, AspNetApp_webApi_xml));
+
+
             });
         }
 

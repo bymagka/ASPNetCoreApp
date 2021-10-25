@@ -4,17 +4,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 using ASPNetCoreApp.Interfaces.Services;
-using ASPNetCoreApp.DAL.Context;
-using Microsoft.EntityFrameworkCore;
-using ASPNetCoreApp.Services.Data;
-using ASPNetCoreApp.Services.InSQL;
 using ASPNetCoreApp.Services.InCookies;
 using ASPNetCoreApp.Domain.Identity;
 using Microsoft.AspNetCore.Identity;
 using System;
-using ASPNetCoreApp.Interfaces.TestApi;
-using ASPNetCoreApp.WebAPI.Clients;
-using ASPNetCoreApp.WebAPI.Clients.Identity;
 using ASPNetCoreApp.Services.Infostructure;
 
 namespace ASPNetCoreApp

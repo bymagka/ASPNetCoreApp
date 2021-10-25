@@ -9,14 +9,28 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ASPNetCoreApp.Domain.Entities
 {
+
+    /// <summary>
+    /// Сотрудник
+    /// </summary>
     [Index(nameof(LastName),IsUnique = true)]
     public class Employee : NamedEntity
-    { 
-
+    {
+        /// <summary>
+        /// Фамилия
+        /// </summary>
         public string LastName { get; set; }
 
+
+        /// <summary>
+        /// Возраст
+        /// </summary>
         public int Age { get; set; }
 
+
+        /// <summary>
+        /// День рождени
+        /// </summary>
         [DataType(DataType.Date)]
         public DateTime BirthdayDate { get; set; }
     }
