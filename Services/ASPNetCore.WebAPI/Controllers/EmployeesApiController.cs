@@ -8,6 +8,7 @@ using ASPNetCoreApp.Domain.Entities;
 using ASPNetCoreApp.Services.Infostructure;
 using System.Net;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 
 namespace ASPNetCoreApp.Controllers
 {
@@ -20,10 +21,12 @@ namespace ASPNetCoreApp.Controllers
     public class EmployeesApiController : ControllerBase
     {
         private readonly IEmployeeService employeeService;
+        private readonly ILogger<EmployeesApiController> logger;
 
-        public EmployeesApiController(IEmployeeService employeeService)
+        public EmployeesApiController(IEmployeeService employeeService,ILogger<EmployeesApiController> logger)
         {
             this.employeeService = employeeService;
+            this.logger = logger;
         }
 
 
@@ -35,6 +38,7 @@ namespace ASPNetCoreApp.Controllers
         public IActionResult GetAll()
         {
             var employyes = employeeService.GetAll();
+            logger.LogInformation("Запрос на получение всех сотрудников");
             return Ok(employyes);
         }
 

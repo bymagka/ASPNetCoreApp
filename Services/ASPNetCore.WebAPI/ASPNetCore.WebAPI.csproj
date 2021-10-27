@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\ASPNetCoreApp.Logger\ASPNetCoreApp.Logger.csproj" />
     <ProjectReference Include="..\..\Data\ASPNetCoreApp.DAL\ASPNetCoreApp.DAL.csproj" />
     <ProjectReference Include="..\ASPNetCoreApp.Services\ASPNetCoreApp.Services.csproj" />
   </ItemGroup>

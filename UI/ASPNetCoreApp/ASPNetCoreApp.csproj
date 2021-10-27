@@ -28,6 +28,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Common\ASPNetCoreApp.Domain\ASPNetCoreApp.Domain.csproj" />
+    <ProjectReference Include="..\..\Common\ASPNetCoreApp.Logger\ASPNetCoreApp.Logger.csproj" />
     <ProjectReference Include="..\..\Data\ASPNetCoreApp.DAL\ASPNetCoreApp.DAL.csproj" />
     <ProjectReference Include="..\..\Services\ASPNetCoreApp.Interfaces\ASPNetCoreApp.Interfaces.csproj" />
     <ProjectReference Include="..\..\Services\ASPNetCoreApp.Services\ASPNetCoreApp.Services.csproj" />

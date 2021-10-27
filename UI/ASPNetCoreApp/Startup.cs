@@ -9,15 +9,17 @@ using ASPNetCoreApp.Domain.Identity;
 using Microsoft.AspNetCore.Identity;
 using System;
 using ASPNetCoreApp.Services.Infostructure;
+using Microsoft.Extensions.Logging;
+using ASPNetCoreApp.Logger;
 
 namespace ASPNetCoreApp
 {
     public record Startup(IConfiguration Configuration)
     {
-        public void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services,ILoggerFactory factory)
         {
 
-
+            factory.AddLog4Net();
 
             services.AddIdentity<User, Role>()
                     .AddIdentityAppWebApiClients()
