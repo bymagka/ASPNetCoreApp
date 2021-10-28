@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ASPNetCoreApp.Services.Mappers;
 using ASPNetCoreApp.Services.Infostructure;
-
+using Microsoft.Extensions.Logging;
 
 namespace ASPNetCore.WebAPI.Controllers
 {
@@ -15,16 +15,20 @@ namespace ASPNetCore.WebAPI.Controllers
     public class ProductApiController : ControllerBase
     {
         private readonly IProductData productData;
+        private readonly ILogger<ProductApiController> logger;
 
-        public ProductApiController(IProductData productData)
+        public ProductApiController(IProductData productData,ILogger<ProductApiController> logger)
         {
             this.productData = productData;
+            this.logger = logger;
         }
 
         [HttpGet("brands")]
         public IActionResult GetBrands()
         {
             var brands = productData.GetBrands();
+
+            logger.LogInformation("Getting all brands");
 
             return Ok(brands.ToDTO());
         }
@@ -34,6 +38,11 @@ namespace ASPNetCore.WebAPI.Controllers
         {
             var brand = productData.GetBrandById(id);
 
+            if (brand is not { })
+                logger.LogInformation("Brand {0} was found by id {1}", brand, id);
+            else
+                logger.LogError("Brand was not found by id {0}", id);
+
             return brand is null ? NotFound() : Ok(brand.ToDTO());
         }
 
@@ -41,6 +50,8 @@ namespace ASPNetCore.WebAPI.Controllers
         public IActionResult GetSections()
         {
             var sections = productData.GetSections();
+
+            logger.LogInformation("Getting all sections");
 
             return Ok(sections.ToDTO());
         }
@@ -50,6 +61,11 @@ namespace ASPNetCore.WebAPI.Controllers
         {
             var section = productData.GetSectionById(id);
 
+            if (section is not { })
+                logger.LogInformation("Section {0} was found by id {1}", section, id);
+            else
+                logger.LogError("Section was not found by id {0}", id);
+
             return section is null ? NotFound() :  Ok(section.ToDTO());
         }
 
@@ -58,6 +74,8 @@ namespace ASPNetCore.WebAPI.Controllers
         {
             var products = productData.GetProducts(filter);
 
+            logger.LogInformation("Getting all products");
+
             return Ok(products.ToDTO());
         }
 
@@ -65,6 +83,11 @@ namespace ASPNetCore.WebAPI.Controllers
         public IActionResult GetProduct(int id)
         {
             var product = productData.GetProductById(id);
+
+            if (product is not { })
+                logger.LogInformation("Product {0} was found by id {1}", product, id);
+            else
+                logger.LogError("Product was not found by id {0}", id);
 
             return product is null ? NotFound() : Ok(product.ToDTO());
         }

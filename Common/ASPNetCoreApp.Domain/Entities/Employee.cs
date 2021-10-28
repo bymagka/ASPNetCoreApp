@@ -33,5 +33,10 @@ namespace ASPNetCoreApp.Domain.Entities
         /// </summary>
         [DataType(DataType.Date)]
         public DateTime BirthdayDate { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Name} {LastName} {Age} y.o.";
+        }
     }
 }

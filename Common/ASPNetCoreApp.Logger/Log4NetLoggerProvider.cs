@@ -25,7 +25,7 @@ namespace ASPNetCoreApp.Logger
             {
                 var xml = new XmlDocument();
                 xml.Load(configurationFile);
-                return new Log4NetLogger(category,xml["log4net"]);
+                return new Log4NetLogger(category,xml["configuration"]["log4net"]);
             });
         }
 

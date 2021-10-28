@@ -52,5 +52,10 @@ namespace ASPNetCoreApp.Domain.Entities
         /// Товары заказа
         /// </summary>
         public ICollection<OrderItem> Items { get; set; } = new List<OrderItem>();
+
+        public override string ToString()
+        {
+            return $"{Date} {Description} made by {User.UserName}. Phone is {Phone}";
+        }
     }
 }

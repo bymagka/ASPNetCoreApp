@@ -20,6 +20,8 @@ namespace ASPNetCoreApp.Logger
             var logger_repository = LogManager.CreateRepository(Assembly.GetEntryAssembly(), typeof(log4net.Repository.Hierarchy.Hierarchy));
 
             _Log = LogManager.GetLogger(logger_repository.Name, Category);
+
+            log4net.Config.XmlConfigurator.Configure(Configuration);
         }
 
         public IDisposable BeginScope<TState>(TState state) => null;

@@ -47,5 +47,10 @@ namespace ASPNetCoreApp.Domain.Entities
         /// </summary>
         [Column(TypeName = "decimal(12,2)")]
         public decimal Price { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Name}";
+        }
     }
 }

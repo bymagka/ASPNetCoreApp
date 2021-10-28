@@ -16,10 +16,10 @@ namespace ASPNetCoreApp
 {
     public record Startup(IConfiguration Configuration)
     {
-        public void ConfigureServices(IServiceCollection services,ILoggerFactory factory)
+        public void ConfigureServices(IServiceCollection services)
         {
 
-            factory.AddLog4Net();
+           
 
             services.AddIdentity<User, Role>()
                     .AddIdentityAppWebApiClients()
@@ -66,8 +66,10 @@ namespace ASPNetCoreApp
 
 
       
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory factory)
         {
+            factory.AddLog4Net();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

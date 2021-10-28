@@ -53,10 +53,14 @@ namespace ASPNetCoreApp.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetById(int Id)
         {
+            logger.LogInformation("Getting employee by id {0}",Id);
             var employye = employeeService.GetById(Id);
 
             if (employye == null)
+                logger.LogError("Employee with {0} was not found",Id);
                 return NotFound();
+
+            logger.LogInformation("Employee with {0} was found. It is {0}", employye);
 
             return Ok(employye);
         }
@@ -73,6 +77,11 @@ namespace ASPNetCoreApp.Controllers
         {
             var result = employeeService.Delete(Id);
 
+            if (result)
+                logger.LogInformation("Employee with id {0} was deleted.", Id);
+            else
+                logger.LogError("Employee with id {0} wasn't deleted");
+
             return result ? Ok(result) : NotFound(result);
         }
         
@@ -87,6 +96,8 @@ namespace ASPNetCoreApp.Controllers
         {
             int id = employeeService.Add(emp);
 
+            logger.LogInformation("Employee {0} was added", emp);
+
             return CreatedAtAction(nameof(Add), new { id }, emp);
         }
 
@@ -99,6 +110,8 @@ namespace ASPNetCoreApp.Controllers
         public IActionResult Update(Employee emp)
         {
             employeeService.Update(emp);
+
+            logger.LogInformation("Employee {0} was updated");
 
             return Ok();
         }
