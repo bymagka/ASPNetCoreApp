@@ -56,11 +56,11 @@ namespace ASPNetCoreApp.Controllers
             logger.LogInformation("Getting employee by id {0}",Id);
             var employye = employeeService.GetById(Id);
 
-            if (employye == null)
+            if (employye == null) { 
                 logger.LogError("Employee with {0} was not found",Id);
                 return NotFound();
-
-            logger.LogInformation("Employee with {0} was found. It is {0}", employye);
+            }
+            logger.LogInformation("Employee with id {0} was found. It is {1}",Id, employye);
 
             return Ok(employye);
         }

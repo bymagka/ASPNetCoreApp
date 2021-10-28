@@ -1,7 +1,16 @@
 ﻿
+@using ASPNetCoreApp.Controllers;
+@using Microsoft.Extensions.Logging;
+
 @model ASPNetCoreApp.Domain.ViewModels.EmployeeViewModel
 
+@inject ILogger<EmployeesController> Logger
+
 <div class="container">
+    @{ 
+        Logger.LogInformation("Rendering the employee's details page");
+    }
+
     <a asp-controller="Employees" asp-action="Index" class="btn btn-default">Возврат к списку сотрудников</a>
 
     <h1>Дополнительная информация по сотруднику @Model.LastName @Model.FirstName</h1>
