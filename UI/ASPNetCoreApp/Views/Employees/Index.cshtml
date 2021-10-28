@@ -1,9 +1,13 @@
 ﻿@using ASPNetCoreApp.Domain.Identity; 
+@using ASPNetCoreApp.Controllers;
+@using Microsoft.Extensions.Logging; 
 
 @model IEnumerable<ASPNetCoreApp.Domain.ViewModels.EmployeeViewModel>
 @{ 
     ViewBag.Title = "Employees";
 }
+
+@inject ILogger<EmployeesController> Logger
 
 <div class="container">
     @if (User.IsInRole(Role.Administrators))
@@ -24,6 +28,9 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @{ 
+                        Logger.LogInformation("Rendering the employyes list");
+                    }
                     @foreach (var employee in Model)
                     {
                         <tr>
