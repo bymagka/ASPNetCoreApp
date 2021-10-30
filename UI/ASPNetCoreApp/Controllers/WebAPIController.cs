@@ -15,6 +15,8 @@ namespace ASPNetCoreApp.Controllers
         {
             valuesService = ValuesService;
         }
+
+
         public IActionResult Index()
         {
             var values = valuesService.GetAll();
