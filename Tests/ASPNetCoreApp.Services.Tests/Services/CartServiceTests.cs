@@ -4,7 +4,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Linq;
 using Assert = Xunit.Assert;
-
+using Moq;
+using ASPNetCoreApp.Interfaces.Services;
+using ASPNetCoreApp.Domain;
+using ASPNetCoreApp.Services.Services;
 
 namespace ASPNetCoreApp.Services.Tests.Services
 {
@@ -12,6 +15,12 @@ namespace ASPNetCoreApp.Services.Tests.Services
     public class CartServiceTests
     {
         private Cart _Cart;
+
+        private Mock<ICartStore> cartStoreMock;
+
+        private Mock<IProductData> cartProductData;
+
+        private ICartService cartService;
 
         [TestInitialize]
         public void TestInitialize()
@@ -25,6 +34,79 @@ namespace ASPNetCoreApp.Services.Tests.Services
 
                 }
             };
+
+            cartStoreMock = new Mock<ICartStore>();
+            cartStoreMock.Setup(x => x.Cart).Returns(_Cart);
+
+            cartProductData = new Mock<IProductData>();
+            cartProductData.Setup(x => x.GetProducts(It.IsAny<ProductFilter>())).Returns(new[] 
+            { 
+                new Product
+                {
+                    Id = 1,
+                    Name = "Product 1",
+                    Price = 1.1m,
+                    Order = 1,
+                    ImageUrl = "img_1.png",
+                    Brand = new Brand
+                    {
+                        Id = 1,
+                        Name = "Brand 1",
+                        Order = 1,
+                    },
+                    SectionId = 1,
+                    Section = new Section
+                    {
+                        Id = 1,
+                        Name = "Section 1",
+                        Order = 1,
+                    }
+                },
+                new Product
+                {
+                    Id = 2,
+                    Name = "Product 2",
+                    Price = 1.45m,
+                    Order = 2,
+                    ImageUrl = "img_2.png",
+                    Brand = new Brand
+                    {
+                        Id = 2,
+                        Name = "Brand 2",
+                        Order = 2,
+                    },
+                    SectionId = 2,
+                    Section = new Section
+                    {
+                        Id = 2,
+                        Name = "Section 2",
+                        Order = 2,
+                    }
+                },
+                new Product
+                {
+                    Id = 3,
+                    Name = "Product 3",
+                    Price = 2.1m,
+                    Order = 3,
+                    ImageUrl = "img_3.png",
+                    Brand = new Brand
+                    {
+                        Id = 3,
+                        Name = "Brand 3",
+                        Order = 3,
+                    },
+                    SectionId = 3,
+                    Section = new Section
+                    {
+                        Id = 3,
+                        Name = "Section 31",
+                        Order = 3,
+                    }
+                },
+            });
+
+            cartService = new CartService(cartStoreMock.Object, cartProductData.Object);
         }
 
         [TestMethod]
@@ -75,6 +157,63 @@ namespace ASPNetCoreApp.Services.Tests.Services
             var actual_value = cart.TotalPrice;
 
             Assert.Equal(expected_value, actual_value);
+        }
+
+
+        [TestMethod]
+        public void CartService_Add_WorkCorrect()
+        {
+            _Cart.CartItems.Clear();
+
+            const int expected_id = 5;
+            const int expected_items_count = 1;
+
+            cartService.Add(expected_id);
+
+            var actual_items_count = _Cart.ItemsCount;
+
+            Assert.Equal(expected_items_count, actual_items_count);
+
+            Assert.Single(_Cart.CartItems);
+
+            Assert.Equal(expected_id, _Cart.CartItems.Single().ProductId);
+        }
+
+        [TestMethod]
+        public void CartService_Remove_CorrectItem()
+        {
+            const int item_id = 1;
+
+            const int expected_product_id = 2;
+
+            cartService.Remove(item_id);
+
+            Assert.Single(_Cart.CartItems);
+
+            Assert.Equal(expected_product_id, _Cart.CartItems.Single().ProductId);
+
+        }
+
+
+        [TestMethod]
+        public void CartService_Decrement_Correct()
+        {
+            const int item_id = 2;
+            const int expected_quantity = 2;
+            const int expected_items_count = 4;
+            const int expected_products_count = 2;
+
+            cartService.Decrement(item_id);
+
+            Assert.Equal(expected_items_count, _Cart.ItemsCount);
+
+            Assert.Equal(expected_products_count,_Cart.CartItems.Count);
+
+            var items = _Cart.CartItems.ToArray();
+
+            Assert.Equal(expected_quantity, items[1].Quantity);
+
+            Assert.Equal(item_id, items[1].ProductId);
         }
     }
 }
