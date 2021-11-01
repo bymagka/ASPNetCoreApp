@@ -29,7 +29,7 @@ namespace ASPNetCoreApp.Services.Tests.Services
             {
                 CartItems = new List<CartItem>()
                 {
-                    new CartItem(){ProductId = 1,Quantity= 2},
+                    new CartItem(){ProductId = 1,Quantity= 1},
                     new CartItem(){ProductId= 2, Quantity = 3}
 
                 }
@@ -200,7 +200,7 @@ namespace ASPNetCoreApp.Services.Tests.Services
         {
             const int item_id = 2;
             const int expected_quantity = 2;
-            const int expected_items_count = 4;
+            const int expected_items_count = 3;
             const int expected_products_count = 2;
 
             cartService.Decrement(item_id);
@@ -215,5 +215,43 @@ namespace ASPNetCoreApp.Services.Tests.Services
 
             Assert.Equal(item_id, items[1].ProductId);
         }
+
+
+        [TestMethod]
+        public void CartService_Decrement_RemoveItem_When_Decrement_To_0()
+        {
+            const int item_id = 1;
+            const int expected_items_count = 3;
+            
+
+            cartService.Decrement(item_id);
+
+            Assert.Equal(expected_items_count, _Cart.ItemsCount);
+            Assert.Single(_Cart.CartItems);
+            
+        }
+
+        [TestMethod]
+        public void CartService_Clear_Correct()
+        {
+            cartService.Clear();
+
+            Assert.Empty(_Cart.CartItems);
+        }
+
+        [TestMethod]
+        public void CartService_GetViewModel_Work_Correct()
+        {
+            const int expected_items_count = 4;
+            const decimal expected_first_item_price = 1.1m;
+            const decimal expected_total_price = 5.45m;
+
+            CartViewModel result = cartService.GetViewModel();
+
+            Assert.Equal(expected_items_count, result.ItemsCount);
+            Assert.Equal(expected_first_item_price, result.ItemsList.First().product.Price);
+            Assert.Equal(expected_total_price, result.TotalPrice);
+        }
+
     }
 }

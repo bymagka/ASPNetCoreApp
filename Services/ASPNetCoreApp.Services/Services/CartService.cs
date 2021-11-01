@@ -56,8 +56,8 @@ namespace ASPNetCoreApp.Services.Services
 
             if (ReferenceEquals(cartItem, null)) return;
 
-            if (cartItem.Quantity <= 0) _cart.CartItems.Remove(cartItem);
-            else cartItem.Quantity--;
+            if (--cartItem.Quantity <= 0) _cart.CartItems.Remove(cartItem);
+            
 
 
             cartStore.Cart = _cart;
