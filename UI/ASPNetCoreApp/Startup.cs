@@ -11,6 +11,7 @@ using System;
 using ASPNetCoreApp.Services.Infostructure;
 using Microsoft.Extensions.Logging;
 using ASPNetCoreApp.Logger;
+using ASPNetCoreApp.Services.Services;
 
 namespace ASPNetCoreApp
 {
@@ -55,7 +56,8 @@ namespace ASPNetCoreApp
             });
 
 
-            services.AddScoped<ICartService, InCookiesCartService>();
+            services.AddScoped<ICartStore, InCookiesCartStore>();
+            services.AddScoped<ICartService, CartService>();
         
 
             
