@@ -34,7 +34,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASPNetCoreApp.Logger", "Com
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{82DA829A-6FB9-4DFE-94E8-4F8379F9F37C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASPNetCoreApp.Tests", "Tests\ASPNetCoreApp.Tests\ASPNetCoreApp.Tests.csproj", "{20ABAE44-EA71-4C10-9C14-B5255ADBFAD8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASPNetCoreApp.Tests", "Tests\ASPNetCoreApp.Tests\ASPNetCoreApp.Tests.csproj", "{20ABAE44-EA71-4C10-9C14-B5255ADBFAD8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASPNetCoreApp.Services.Tests", "Tests\ASPNetCoreApp.Services.Tests\ASPNetCoreApp.Services.Tests.csproj", "{EDD556EB-0D6B-4773-A716-EE6BF37BC7CE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -78,6 +80,10 @@ Global
 		{20ABAE44-EA71-4C10-9C14-B5255ADBFAD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20ABAE44-EA71-4C10-9C14-B5255ADBFAD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20ABAE44-EA71-4C10-9C14-B5255ADBFAD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDD556EB-0D6B-4773-A716-EE6BF37BC7CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDD556EB-0D6B-4773-A716-EE6BF37BC7CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDD556EB-0D6B-4773-A716-EE6BF37BC7CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDD556EB-0D6B-4773-A716-EE6BF37BC7CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -92,6 +98,7 @@ Global
 		{54634FAA-7B4E-4562-AAC6-576C2F0D6C58} = {F392E52C-7700-4F0F-8565-7D29000ACAE6}
 		{0389248C-6D08-42E5-AD2B-9BE92491A5E1} = {1C106E9D-B85F-4F3C-AEBF-08FEFEC31B5E}
 		{20ABAE44-EA71-4C10-9C14-B5255ADBFAD8} = {82DA829A-6FB9-4DFE-94E8-4F8379F9F37C}
+		{EDD556EB-0D6B-4773-A716-EE6BF37BC7CE} = {82DA829A-6FB9-4DFE-94E8-4F8379F9F37C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {490FE150-29E4-4810-8E88-036D3D68C2EC}
