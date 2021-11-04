@@ -15,7 +15,7 @@ namespace ASPNetCoreApp.Components
             _ProductData = productData;
         }
 
-        public IViewComponentResult Invoke()
+        public IViewComponentResult Invoke(string BrandId)
         {
 
             return View(GetBrands());

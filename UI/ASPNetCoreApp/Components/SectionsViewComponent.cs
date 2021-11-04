@@ -3,6 +3,7 @@ using ASPNetCoreApp.Interfaces.Services;
 using System.Collections.Generic;
 using ASPNetCoreApp.Domain.ViewModels;
 using System.Linq;
+using ASPNetCoreApp.ViewModels;
 
 namespace ASPNetCoreApp.Components
 {
@@ -16,10 +17,25 @@ namespace ASPNetCoreApp.Components
         }
 
 
-        public IViewComponentResult Invoke() => View(GetSections());
-
-        public IEnumerable<SectionViewModel> GetSections()
+        public IViewComponentResult Invoke(string SectionId)
         {
+            var section_id = int.TryParse(SectionId, out int id) ? id : (int?)null;
+
+            var sections = GetSections(section_id, out var parent_section_id);
+
+
+            
+           return  View(new SelectableSectionsViewModel { 
+                Sections = sections,
+                SectionId = section_id,
+                ParentSectionId = parent_section_id
+           });
+        }
+
+        public IEnumerable<SectionViewModel> GetSections(int? SectionId,out int? ParentSectionId)
+        {
+            ParentSectionId = null;
+
             var SectionsCollection = _ProductData.GetSections();
 
             var parent_sections = SectionsCollection.Where(sect => sect.ParentId is null)

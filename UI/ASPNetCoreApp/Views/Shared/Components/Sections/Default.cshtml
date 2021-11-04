@@ -1,10 +1,10 @@
-﻿@model IEnumerable<SectionViewModel>
+﻿@model ASPNetCoreApp.ViewModels.SelectableSectionsViewModel
 
 <h2>Категории</h2>
 <div class="panel-group category-products" id="accordian">
     <!--category-productsr-->
 
-    @foreach (var sect in Model)
+    @foreach (var sect in Model.Sections)
     {
          @if (sect.ChildSections.Count != 0)
          {
@@ -18,12 +18,12 @@
                     </h4>
                 </div>
       
-                <div id="@sect.GetHashCode()" class="panel-collapse collapse">
+                <div id="@sect.GetHashCode()" class="panel-collapse collapse" @(sect.Id == Model.ParentSectionId ? "in" : null)>
                     <div class="panel-body">
                         <ul>
                             @foreach (var subSect in sect.ChildSections)
                             {
-                                <li><a asp-controller="Catalog" asp-action="Index" asp-route-SectionId="@subSect.Id">@subSect.Name </a></li>                    
+                                <li @(subSect.Id == Model.SectionId ? "class=active" : null)><a asp-controller="Catalog" asp-action="Index" asp-route-SectionId="@subSect.Id">@subSect.Name </a></li>                    
                             }
                         </ul>
                     </div>
