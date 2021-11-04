@@ -14,6 +14,8 @@ namespace ASPNetCoreApp.TagHelpers
     {
         private const string AttributeName = "ws-is-active-route";
 
+        private const string IgnoreAction = "ws-ignore-action";
+
         [HtmlAttributeName("asp-controller")]
         public string Controller { get; set; }
 
@@ -31,8 +33,9 @@ namespace ASPNetCoreApp.TagHelpers
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
+            var ignore_action = output.Attributes.RemoveAll(IgnoreAction);
 
-            if (IsActive())
+            if (IsActive(ignore_action))
             {
                 MakeActive(output);
             }
@@ -59,7 +62,7 @@ namespace ASPNetCoreApp.TagHelpers
             }
         }
 
-        private bool IsActive()
+        private bool IsActive(bool ignore_action)
         {
             var route_values = ViewContext.RouteData.Values;
 
@@ -70,7 +73,7 @@ namespace ASPNetCoreApp.TagHelpers
             if (Controller is { Length: > 0 } controller && !String.Equals(controller, route_controller))
                 return false;
 
-            if (Action is { Length: > 0 } action && !String.Equals(action, route_action))
+            if (!ignore_action && Action is { Length: > 0 } action && !String.Equals(action, route_action))
                 return false;
 
             foreach(var (key,value) in RouteValues)

@@ -4,13 +4,13 @@
     <ul class="nav navbar-nav collapse navbar-collapse">
         <li><a asp-controller="Home" asp-action="Index" class="active">Home</a></li>
         <li class="dropdown">
-            <a href="#">Магазин<i class="fa fa-angle-down"></i></a>
+            <a  asp-controller="Catalog" asp-action="Index" ws-is-active-route ws-ignore-action>Магазин<i class="fa fa-angle-down"></i></a>
             <ul role="menu" class="sub-menu">
-                <li><a asp-controller="Catalog" asp-action="Index">Каталог</a></li>
-                <li><a asp-controller="Home" asp-action="ProductDetails">О товаре</a></li>
-                <li><a asp-controller="Home" asp-action="Checkout">Оформить заказ</a></li>
-                <li><a asp-controller="Cart" asp-action="Index">Корзина</a></li>
-                <li><a asp-controller="Account" asp-action="Login">Вход</a></li>
+                <li><a asp-controller="Catalog" asp-action="Index" ws-is-active-route>Каталог</a></li>
+                <li><a asp-controller="Home" asp-action="ProductDetails" ws-is-active-route>О товаре</a></li>
+                <li><a asp-controller="Home" asp-action="Checkout" ws-is-active-route>Оформить заказ</a></li>
+                <li><a asp-controller="Cart" asp-action="Index" ws-is-active-route>Корзина</a></li>
+                <li><a asp-controller="Account" asp-action="Login" ws-is-active-route>Вход</a></li>
             </ul>
         </li>
         <li class="dropdown">
@@ -20,7 +20,7 @@
                 <li><a asp-controller="Home" asp-action="BlogSingle">Блог магазина</a></li>
             </ul>
         </li>
-        <li><a asp-controller="Home" asp-action="PageNotFound" >404</a></li>
+        <li><a asp-controller="Home" asp-action="PageNotFound" ws-is-active-route>404</a></li>
         <li><a asp-controller="Home" asp-action="ContactUs" ws-is-active-route>Контакты</a></li>
         <li><a asp-controller="Employees" asp-action="Index" ws-is-active-route>Сотрудники</a></li>
         <li><a asp-controller="WebAPI" asp-action="Index" class="@IsActive("WebAPI")">WebAPI</a></li>
