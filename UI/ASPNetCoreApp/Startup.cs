@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using ASPNetCoreApp.Logger;
 using ASPNetCoreApp.Services.Services;
 
+
 namespace ASPNetCoreApp
 {
     public record Startup(IConfiguration Configuration)
@@ -20,7 +21,7 @@ namespace ASPNetCoreApp
         public void ConfigureServices(IServiceCollection services)
         {
 
-           
+
 
             services.AddIdentity<User, Role>()
                     .AddIdentityAppWebApiClients()
