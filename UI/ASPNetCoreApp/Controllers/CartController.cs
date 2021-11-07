@@ -63,5 +63,33 @@ namespace ASPNetCoreApp.Controllers
             ViewBag.OrderId = id;
             return View();
         }
+
+        #region WebAPi
+
+        public IActionResult GetCartView() => ViewComponent("Cart");
+
+        public IActionResult AddAPI(int id)
+        {
+            cartService.Add(id);
+
+            return Json(new { id, message = $"Товар с id {id} добавлен в корзину" });
+        }
+
+        public IActionResult DecrementAPI(int id)
+        {
+            cartService.Decrement(id);
+
+            return Json(new { id, message = $"Количество товара с id {} было уменьшено на 1" });
+        }
+
+        public IActionResult RemoveAPI(int id)
+        {
+            cartService.Remove(id);
+
+            return Ok();
+        }
+
+        #endregion
+
     }
 }
