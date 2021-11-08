@@ -7,25 +7,35 @@ using ASPNetCoreApp.Domain;
 using ASPNetCoreApp.Interfaces.Services;
 using ASPNetCoreApp.Domain.ViewModels;
 using ASPNetCoreApp.Services.Mappers;
+using Microsoft.Extensions.Configuration;
 
 namespace ASPNetCoreApp.Controllers
 {
     public class CatalogController : Controller
     {
+        private readonly IConfiguration configuration;
+
         public IProductData ProductData { get; }
 
-        public CatalogController(IProductData productData) => ProductData = productData;
-     
-        public IActionResult Index(int? BrandId, int? SectionId)
+        public CatalogController(IProductData productData, IConfiguration configuration)
         {
+            ProductData = productData;
+            this.configuration = configuration;
+        }
+     
+        public IActionResult Index(int? BrandId, int? SectionId,int Page = 1,int? PageSize = null)
+        {
+            var page_size = PageSize ?? (int.TryParse(configuration["CatalogPageSize"], out int value) ? value : null);
 
             ProductFilter filter = new ProductFilter()
             {
                 BrandId = BrandId,
-                SectionId = SectionId
+                SectionId = SectionId,
+                Page = Page,
+                PageSize = page_size
             };
 
-            var products = ProductData.GetProducts(filter);
+            var (products,total_count) = ProductData.GetProducts(filter);
 
             var catalogViewModel = new CatalogViewModel
             {

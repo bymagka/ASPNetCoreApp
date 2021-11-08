@@ -35,12 +35,8 @@ namespace ASPNetCoreApp.Services.Tests.Services
                 }
             };
 
-            cartStoreMock = new Mock<ICartStore>();
-            cartStoreMock.Setup(x => x.Cart).Returns(_Cart);
-
-            cartProductData = new Mock<IProductData>();
-            cartProductData.Setup(x => x.GetProducts(It.IsAny<ProductFilter>())).Returns(new[] 
-            { 
+            var products = new[]
+            {
                 new Product
                 {
                     Id = 1,
@@ -104,7 +100,14 @@ namespace ASPNetCoreApp.Services.Tests.Services
                         Order = 3,
                     }
                 },
-            });
+            };
+
+
+            cartStoreMock = new Mock<ICartStore>();
+            cartStoreMock.Setup(x => x.Cart).Returns(_Cart);
+
+            cartProductData = new Mock<IProductData>();
+            cartProductData.Setup(x => x.GetProducts(It.IsAny<ProductFilter>())).Returns(new ProductsPage(products,products.Length));
 
             cartService = new CartService(cartStoreMock.Object, cartProductData.Object);
         }

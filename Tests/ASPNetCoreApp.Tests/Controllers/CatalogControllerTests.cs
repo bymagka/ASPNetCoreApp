@@ -8,6 +8,7 @@ using Assert = Xunit.Assert;
 using Microsoft.AspNetCore.Mvc;
 using ASPNetCoreApp.Domain.ViewModels;
 using ASPNetCoreApp.Domain;
+using Microsoft.Extensions.Configuration;
 
 namespace ASPNetCoreApp.Tests.Controllers
 {
@@ -60,7 +61,11 @@ namespace ASPNetCoreApp.Tests.Controllers
                     }                   
                 });
 
-            var controller = new CatalogController(product_service_mock.Object);
+            var configuration_mock = new Mock<IConfiguration>();
+
+            configuration_mock.Setup(c => c["CatalogPageSize"]).Returns("4");
+
+            var controller = new CatalogController(product_service_mock.Object,configuration_mock.Object);
 
             var result = controller.Details(expected_id);
 

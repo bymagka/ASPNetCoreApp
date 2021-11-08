@@ -19,7 +19,7 @@ namespace ASPNetCoreApp.Services.InMemory
             return TestData.Sections;
         }
 
-        public IEnumerable<Product> GetProducts(ProductFilter filter = null) 
+        public ProductsPage GetProducts(ProductFilter filter = null) 
         {
             IEnumerable<Product> query = TestData.Products;
 
@@ -36,8 +36,9 @@ namespace ASPNetCoreApp.Services.InMemory
                     query = query.Where(x => x.SectionId == filter.SectionId);
             }
 
+            var total_count = query.Count();
 
-            return query;
+            return new ProductsPage(query.AsEnumerable(),total_count);
         }
 
         public Product GetProductById(int id) => TestData.Products.FirstOrDefault(prod => prod.Id == id);

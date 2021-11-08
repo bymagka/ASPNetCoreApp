@@ -24,7 +24,7 @@ namespace ASPNetCoreApp.Areas.Admin.Controllers
         public IActionResult Index()
         {
             
-            return View(productData.GetProducts().ToView());
+            return View(productData.GetProducts().Products.ToView());
         }
     }
 }
