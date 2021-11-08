@@ -1,1 +1,5 @@
-﻿<li><i class="fa fa-shopping-cart"></i>Корзина @(ViewBag.Count == 0 ? null : $"{ViewBag.Count}")</li>
+﻿<li>
+    <a asp-controller="Cart" asp-action="Index" id="cart-container">
+        <i class="fa fa-shopping-cart"></i>Корзина @(ViewBag.Count == 0 ? null : $"({ViewBag.Count})")
+    </a>
+</li>

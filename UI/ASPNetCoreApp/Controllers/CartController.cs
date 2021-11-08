@@ -79,7 +79,7 @@ namespace ASPNetCoreApp.Controllers
         {
             cartService.Decrement(id);
 
-            return Json(new { id, message = $"Количество товара с id {} было уменьшено на 1" });
+            return Json(new { id, message = $"Количество товара с id {id} было уменьшено на 1" });
         }
 
         public IActionResult RemoveAPI(int id)
