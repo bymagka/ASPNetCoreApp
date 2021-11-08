@@ -102,7 +102,7 @@ namespace ASPNetCoreApp.Services.InCookies
                 Ids = Cart.CartItems.Select(x => x.ProductId).ToArray()
             });
 
-            var views = products.ToView().ToDictionary(x => x.Id);
+            var views = products.Products.ToView().ToDictionary(x => x.Id);
 
             return new CartViewModel
             {

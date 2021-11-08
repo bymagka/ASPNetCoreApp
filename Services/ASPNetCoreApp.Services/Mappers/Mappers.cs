@@ -240,4 +240,12 @@ namespace ASPNetCoreApp.Services.Mappers
             });
         }
     }
+
+    public static class ProductsPageDTOMapper
+    {
+        public static ProductsPageDTO ToDTO(this ProductsPage Page) => new ProductsPageDTO(Page.Products.ToDTO(), Page.TotalCount);
+
+        public static ProductsPage FromDTO(this ProductsPageDTO Page) => new ProductsPage(Page.Products.FromDTO(), Page.TotalCount);
+    }
+
 }

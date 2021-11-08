@@ -10,7 +10,7 @@ namespace ASPNetCoreApp.Interfaces.Services
 
         IEnumerable<Section> GetSections();
 
-        IEnumerable<Product> GetProducts(ProductFilter filter = null);
+        ProductsPage GetProducts(ProductFilter filter = null);
 
         Product GetProductById(int id);
 

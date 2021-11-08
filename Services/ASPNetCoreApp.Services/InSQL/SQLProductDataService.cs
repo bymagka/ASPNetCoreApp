@@ -28,7 +28,7 @@ namespace ASPNetCoreApp.Services.InSQL
                                                         .Include(prod=>prod.Brand)
                                                         .FirstOrDefault(prod => prod.Id == id);
 
-        public IEnumerable<Product> GetProducts(ProductFilter filter = null)
+        public ProductsPage GetProducts(ProductFilter filter = null)
         {
             IQueryable<Product> query = db.Products.Include(x=>x.Brand).Include(x=>x.Section);
 
@@ -44,7 +44,17 @@ namespace ASPNetCoreApp.Services.InSQL
                 if (filter?.SectionId != null)
                     query = query.Where(x => x.SectionId == filter.SectionId);
             }
-            return query;
+
+            var total_count = query.Count();
+
+            if(filter is { PageSize: > 0 and int page_size, Page:>0 and int page_number })
+            {
+                query = query
+                    .Skip((page_number + 1) * page_size)
+                    .Take(page_size);
+            };
+
+            return new ProductsPage(query.AsEnumerable(),total_count);
         }
 
         public Section GetSectionById(int id) => db.Sections.FirstOrDefault(sect => sect.Id == id);
