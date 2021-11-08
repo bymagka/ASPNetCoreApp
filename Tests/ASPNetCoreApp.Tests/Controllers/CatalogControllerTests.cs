@@ -95,7 +95,11 @@ namespace ASPNetCoreApp.Tests.Controllers
                 .Setup(i => i.GetProductById(It.Is<int>(id => id > 0)))
                 .Returns<int>(id => null);
 
-            var controller = new CatalogController(product_service_mock.Object);
+            var configuration_mock = new Mock<IConfiguration>();
+
+            configuration_mock.Setup(c => c["CatalogPageSize"]).Returns("4");
+
+            var controller = new CatalogController(product_service_mock.Object,configuration_mock.Object);
 
             var result = controller.Details(expected_id);
 

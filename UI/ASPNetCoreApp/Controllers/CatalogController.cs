@@ -41,7 +41,13 @@ namespace ASPNetCoreApp.Controllers
             {
                 BrandId = BrandId,
                 SectionId = SectionId,
-                Products = products.OrderBy(x => x.Order).ToView()
+                Products = products.OrderBy(x => x.Order).ToView(),
+                PageViewModel = new PageViewModel
+                {
+                    Page = Page,
+                    PageSize = page_size ?? 0,
+                    TotalItems = total_count,
+                }
             };
 
             return View(catalogViewModel);

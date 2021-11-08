@@ -19,6 +19,13 @@
 
             <div class="col-sm-9 padding-right">
                 <partial name="Partial/_FeaturedItems" model="@Model.Products" />
+                <pageing page-view-model="Model.PageViewModel"
+                         page-action="Index"
+                         page-url-SectionId="@Model.SectionId"
+                         page-url-BrandId="@Model.BrandId"
+                         page-url-PageSize="@Context.Request.Query["PageSize"]">
+
+                </pageing>
             </div>
         </div>
     </div>
