@@ -1,6 +1,8 @@
 # ASPNetCoreApp
 
-Web application project.
+Проект с обучения GeekBrains
+
+Учебный
 
 
 Tests result:
